@@ -3,8 +3,8 @@
 	</canvas>
   <script>
   // global variables go here
-  var cardWidth = 70;
-  var cardHeight = 100;
+  var cardWidth = 100;
+  var cardHeight = 125;
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext('2d');
   ctx.canvas.width = window.innerWidth;
@@ -24,10 +24,15 @@
       ctx.rect(10, 10, cardWidth, cardHeight);
       ctx.stroke();
 
-      ctx.font = "30px Arial";
-      ctx.textAlign = "center";
-      ctx.fillStyle = "black";
-      ctx.fillText('here is a card', 100 + (cardWidth/2), 100 + (cardHeight/2));
+      // slot for each color of discarded cards
+      y = 275;
+      for (i = 0; i < 4; i++) {
+        ctx.rect(10, y, cardWidth, cardHeight);
+        ctx.stroke();
+        y += cardHeight + 5;
+      };
+      ctx.rect(10, 10, cardWidth, cardHeight);
+      ctx.stroke();
     }
     draw();
 
@@ -51,8 +56,8 @@
 
     // what about Game??????
     // test for if card is face up or down
-    var newCard = new Card(100, 100, true, 'red', 2);
-    newCard.draw();
+    //var newCard = new Card(100, 100, true, 'red', 2);
+    //newCard.draw();
 
 
   </script>
