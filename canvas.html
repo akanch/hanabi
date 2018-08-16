@@ -15,11 +15,12 @@
   var deckY = 15;
   </script>
   <script type="text/javascript" src="card.js"></script>
+  <script type="text/javascript" src="deck.js"></script>
 	<script>
     // creating the board for the game
     function draw() {
       ctx.rect(0, 0, windowX, windowY);
-      ctx.fillStyle = 'green';
+      ctx.fillStyle = '#6e777a';
       ctx.fill();
 
       // slot for the deck
@@ -89,6 +90,11 @@
     // test for if card is face up or down
     //var newCard = new Card(100, 100, true, 'red', 2);
     //newCard.draw();
+    var deck = new Deck;
+    for (i = 0; i < deck.length; i++){
+      deck[i].draw();
+    }
+
 
 
   </script>

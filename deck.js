@@ -5,7 +5,8 @@ var Deck = function() {
   cards = [];
   for (i = 0; i < this.colors.length; i++) {
     for (j = 0; j < this.numbers.length; j++){
-      cards.push(new Card(deckX, deckY, false, this.colors[i], this.numbers[j]));
+      cards.push(new Card(deckX, deckY, true, this.colors[i], this.numbers[j]));
+      deckX += 10;
     }
   }
   return cards;

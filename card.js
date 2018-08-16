@@ -14,8 +14,11 @@ Card.prototype.draw = function() {
   }
   else {
     ctx.fillStyle = 'black';
+    ctx.stroke();
   }
   ctx.fillRect(this.x, this.y, cardWidth, cardHeight);
+  ctx.strokeStyle = "black";
+  ctx.strokeRect(this.x, this.y, cardWidth, cardHeight);
   ctx.font = "30px Arial";
   ctx.textAlign = "center";
   ctx.fillStyle = "black";
