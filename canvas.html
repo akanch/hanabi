@@ -25,32 +25,43 @@
       ctx.stroke();
 
       // slot for each color of discarded cards
-      y = 275;
+      yDiscard = 275;
       for (i = 0; i < 4; i++) {
-        ctx.rect(15, y, cardWidth, cardHeight);
+        ctx.rect(15, yDiscard, cardWidth, cardHeight);
         ctx.stroke();
-        y += cardHeight + 5;
+        yDiscard += cardHeight + 5;
       };
 
       // blue token slots
-      xFirst = 35;
-      xSecond = 35;
-      y = cardHeight + 55;
-      radius = 20;
+      xFirstRow = 35;
+      xSecondRow = 35;
+      yBlue = cardHeight + 55;
+      radiusBlue = 20;
       for (i = 0; i < 8; i++) {
         if (i < 4) {
           ctx.beginPath();
-          ctx.arc(xFirst, y, radius, 0,2*Math.PI);
-          xFirst += 50;
+          ctx.arc(xFirstRow, yBlue, radiusBlue, 0,2*Math.PI);
+          xFirstRow += 50;
           ctx.stroke();
         }
         else {
           ctx.beginPath();
-          ctx.arc(xSecond, y + radius * 2 + 10, 20, 0,2*Math.PI);
-          xSecond += 50;
+          ctx.arc(xSecondRow, yBlue + radiusBlue * 2 + 10, 20, 0,2*Math.PI);
+          xSecondRow += 50;
           ctx.stroke();
         }
       };
+
+      // red token slots
+      xRed = xFirstRow + 30;
+      yRed = cardHeight + 80;
+      radiusRed = 30;
+      for (i = 0; i < 3; i++) {
+        ctx.beginPath();
+        ctx.arc(xRed, yRed, radiusRed, 0,2*Math.PI);
+        xRed += 70;
+        ctx.stroke();
+        }
     }
     draw();
 
