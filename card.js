@@ -15,18 +15,13 @@ Card.prototype.draw = function() {
   else {
     ctx.fillStyle = 'black';
   }
-  ctx.fillRect(this.x, this.y, 70, 100);
+  ctx.fillRect(this.x, this.y, cardWidth, cardHeight);
   ctx.font = "30px Arial";
   ctx.textAlign = "center";
   ctx.fillStyle = "black";
-  ctx.fillText(this.number, this.x + (70/2), this.y + (100/2));
+  ctx.fillText(this.number, this.x + (cardWidth/2), this.y + (cardHeight/2));
 };
 
-// test for if card is face up or down
-var newCard = new Card(100, 100, false, 'red', 2);
-newCard.draw();
-
- 
     	// Cards can be played
     // Card.prototype.play = function() {
 

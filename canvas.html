@@ -1,66 +1,35 @@
 <html>
-  <h1 id="header"> Hanabi </h1>
-  <canvas id="canvas" width="580" height="500">
+  <canvas id="canvas">
 	</canvas>
-
+  <script>
+  // global variables go here
+  var cardWidth = 70;
+  var cardHeight = 100;
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext('2d');
+  ctx.canvas.width = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
+  var windowX = window.innerWidth;
+  var windowY = window.innerHeight;
+  </script>
+  <script type="text/javascript" src="card.js"></script>
 	<script>
-    // creating canvas for board game
+    // creating the board for the game
     function draw() {
-      var canvas = document.getElementById("canvas");
-      ctx = canvas.getContext('2d');
-      ctx.rect(0, 0, 580, 500);
+      ctx.rect(0, 0, windowX, windowY);
       ctx.fillStyle = 'green';
       ctx.fill();
+
+      // slot for the deck
+      ctx.rect(10, 10, cardWidth, cardHeight);
+      ctx.stroke();
+
+      ctx.font = "30px Arial";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "black";
+      ctx.fillText('here is a card', 100 + (cardWidth/2), 100 + (cardHeight/2));
     }
     draw();
-
-    // Create a deck object
-    var Deck = function() {
-      this.colors = ['blue', 'green', 'red', 'yellow'];
-      this.numbers = [1, 1, 1, 2, 2, 3, 3, 4, 4, 5];
-    };
-    	/*this.init();
-    	this.shuffle();
-}
-
-Deck.prototype.init = function() {
-    var suitsLen = this.suits.length;
-    var ranksLen = this.ranks.length;
-    var i, j;
-
-    for (i=0; i<suitsLen; i++) {
-        for (j=0; j<ranksLen; j++) {
-            this.cards.push( this.ranks[j] + this.suits[i] );
-        }
-    }
-};
-
-/**
- * Fisher-Yates Shuffle
- * https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-
-Deck.prototype.shuffle = function() {
-    var currentIndex = this.cards.length, temporaryValue, randomIndex ;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = this.cards[currentIndex];
-        this.cards[currentIndex] = this.cards[randomIndex];
-        this.cards[randomIndex] = temporaryValue;
-    }
-};
-
-Deck.prototype.drawCard = function () {
-    return this.cards.pop();
-};
-    };
-*/
 
 
     // create Token object, blue tokens are for clues
@@ -81,8 +50,10 @@ Deck.prototype.drawCard = function () {
     	// Player have turns
 
     // what about Game??????
+    // test for if card is face up or down
+    var newCard = new Card(100, 100, true, 'red', 2);
+    newCard.draw();
 
 
   </script>
-  <script type="text/javascript" src="card.js"></script>
 </html>
