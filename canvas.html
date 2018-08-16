@@ -21,18 +21,36 @@
       ctx.fill();
 
       // slot for the deck
-      ctx.rect(10, 10, cardWidth, cardHeight);
+      ctx.rect(15, 15, cardWidth, cardHeight);
       ctx.stroke();
 
       // slot for each color of discarded cards
       y = 275;
       for (i = 0; i < 4; i++) {
-        ctx.rect(10, y, cardWidth, cardHeight);
+        ctx.rect(15, y, cardWidth, cardHeight);
         ctx.stroke();
         y += cardHeight + 5;
       };
-      ctx.rect(10, 10, cardWidth, cardHeight);
-      ctx.stroke();
+
+      // blue token slots
+      xFirst = 35;
+      xSecond = 35;
+      y = cardHeight + 55;
+      radius = 20;
+      for (i = 0; i < 8; i++) {
+        if (i < 4) {
+          ctx.beginPath();
+          ctx.arc(xFirst, y, radius, 0,2*Math.PI);
+          xFirst += 50;
+          ctx.stroke();
+        }
+        else {
+          ctx.beginPath();
+          ctx.arc(xSecond, y + radius * 2 + 10, 20, 0,2*Math.PI);
+          xSecond += 50;
+          ctx.stroke();
+        }
+      };
     }
     draw();
 
