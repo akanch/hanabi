@@ -11,6 +11,8 @@
   ctx.canvas.height = window.innerHeight;
   var windowX = window.innerWidth;
   var windowY = window.innerHeight;
+  var deckX = 15;
+  var deckY = 15;
   </script>
   <script type="text/javascript" src="card.js"></script>
 	<script>
@@ -21,7 +23,7 @@
       ctx.fill();
 
       // slot for the deck
-      ctx.rect(15, 15, cardWidth, cardHeight);
+      ctx.rect(deckX, deckY, cardWidth, cardHeight);
       ctx.stroke();
 
       // slot for each color of discarded cards
