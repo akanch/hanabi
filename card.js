@@ -14,7 +14,8 @@ Card.prototype.draw = function() {
   }
   else {
     ctx.fillStyle = 'black';
-    ctx.stroke();
+    ctx.strokeStyle = "white";
+    ctx.strokeRect(this.x, this.y, cardWidth, cardHeight);
   }
   ctx.fillRect(this.x, this.y, cardWidth, cardHeight);
   ctx.strokeStyle = "black";

@@ -90,9 +90,10 @@
     // test for if card is face up or down
     //var newCard = new Card(100, 100, true, 'red', 2);
     //newCard.draw();
-    var deck = new Deck;
-    for (i = 0; i < deck.length; i++){
-      deck[i].draw();
+    var newDeck = new Deck([1, 1, 1, 2, 2, 3, 3, 4, 4, 5]);
+    newDeck.shuffle();
+    for (i = 0; i < newDeck.length; i++){
+      newDeck[i].draw();
     }
 
 
