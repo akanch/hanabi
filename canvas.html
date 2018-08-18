@@ -13,6 +13,8 @@
   var windowY = window.innerHeight;
   var deckX = 15;
   var deckY = 15;
+  var radiusBlue = 20;
+  var radiusRed = 30;
   </script>
   <script type="text/javascript" src="card.js"></script>
   <script type="text/javascript" src="deck.js"></script>
@@ -39,32 +41,43 @@
       // blue token slots
       var xFirstRow = 35;
       var xSecondRow = 35;
-      var yBlue = cardHeight + 55;
-      var radiusBlue = 20;
+      var yFirstRow = cardHeight + 55
+      var ySecondRow = yFirstRow + + radiusBlue * 2 + 10;
       for (i = 0; i < 8; i++) {
         if (i < 4) {
           ctx.beginPath();
-          ctx.arc(xFirstRow, yBlue, radiusBlue, 0,2*Math.PI);
-          xFirstRow += 50;
+          ctx.arc(xFirstRow, yFirstRow, radiusBlue, 0,2*Math.PI);
           ctx.stroke();
+
+          // first row blue token drawing test
+          blue = new Token('#02a8ff');
+          blue.draw(xFirstRow, yFirstRow);
+          xFirstRow += 50;
         }
         else{
           ctx.beginPath();
-          ctx.arc(xSecondRow, yBlue + radiusBlue * 2 + 10, 20, 0,2*Math.PI);
-          xSecondRow += 50;
+          ctx.arc(xSecondRow, ySecondRow, radiusBlue, 0,2*Math.PI);
           ctx.stroke();
+
+          // second row blue token drawing test
+          blue = new Token('#02a8ff');
+          blue.draw(xSecondRow, ySecondRow);
+          xSecondRow += 50;
         }
       };
 
       // red token slots
       xRed = xFirstRow + 30;
-      yRed = cardHeight + 80;
-      radiusRed = 30;
+      yRed = cardHeight + 80;;
       for (i = 0; i < 3; i++) {
         ctx.beginPath();
         ctx.arc(xRed, yRed, radiusRed, 0,2*Math.PI);
-        xRed += 70;
         ctx.stroke();
+
+        // red token drawing test
+        red = new Token('#d50000');
+        red.draw(xRed, yRed);
+        xRed += 70;
         }
     }
     draw();
