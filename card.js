@@ -24,6 +24,8 @@ Card.prototype.draw = function(x, y) {
   ctx.fillText(this.number, x + (cardWidth/2), y + (cardHeight/2));
 };
 
+// cards can have hints attached to them
+
     	// Cards can be played
     // Card.prototype.play = function() {
 
