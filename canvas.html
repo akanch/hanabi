@@ -91,9 +91,10 @@
     //var newCard = new Card(100, 100, true, 'red', 2);
     //newCard.draw();
     var newDeck = new Deck([1, 1, 1, 2, 2, 3, 3, 4, 4, 5]);
-    newDeck.shuffle();
+    //newDeck.shuffle();
     for (i = 0; i < newDeck.cards.length; i++){
-      newDeck.cards[i].draw();
+      newDeck.cards[i].draw(deckX, deckY);
+      deckX += 10;
     };
 
   </script>

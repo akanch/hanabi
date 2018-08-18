@@ -1,29 +1,27 @@
 // create Card object
-function Card(x, y, sideUp, color, number) {
-  this.x = x;
-  this.y = y;
+function Card(sideUp, color, number) {
   this.sideUp = sideUp;
   this.color = color;
   this.number = number;
 };
 
 // draw a card
-Card.prototype.draw = function() {
+Card.prototype.draw = function(x, y) {
   if (this.sideUp === true) {
     ctx.fillStyle = this.color;
   }
   else {
     ctx.fillStyle = 'black';
     ctx.strokeStyle = "white";
-    ctx.strokeRect(this.x, this.y, cardWidth, cardHeight);
+    ctx.strokeRect(x, y, cardWidth, cardHeight);
   }
-  ctx.fillRect(this.x, this.y, cardWidth, cardHeight);
+  ctx.fillRect(x, y, cardWidth, cardHeight);
   ctx.strokeStyle = "black";
-  ctx.strokeRect(this.x, this.y, cardWidth, cardHeight);
+  ctx.strokeRect(x, y, cardWidth, cardHeight);
   ctx.font = "30px Arial";
   ctx.textAlign = "center";
   ctx.fillStyle = "black";
-  ctx.fillText(this.number, this.x + (cardWidth/2), this.y + (cardHeight/2));
+  ctx.fillText(this.number, x + (cardWidth/2), y + (cardHeight/2));
 };
 
     	// Cards can be played
