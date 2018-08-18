@@ -1,4 +1,4 @@
-// Create a deck obj
+// Create a deck constructor
 function Deck(numbers) {
   this.colors = ['blue', 'green', 'red', 'yellow'];
   this.numbers = numbers;
@@ -20,5 +20,3 @@ Deck.prototype.shuffle = function() {
     this.cards[q] = tempK;
   };
 };
-
-//k = this.cards.length - 1; k > 0; k--

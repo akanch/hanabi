@@ -16,6 +16,7 @@
   </script>
   <script type="text/javascript" src="card.js"></script>
   <script type="text/javascript" src="deck.js"></script>
+    <script type="text/javascript" src="token.js"></script>
 	<script>
     // creating the board for the game
     function draw() {
@@ -36,10 +37,10 @@
       };
 
       // blue token slots
-      xFirstRow = 35;
-      xSecondRow = 35;
-      yBlue = cardHeight + 55;
-      radiusBlue = 20;
+      var xFirstRow = 35;
+      var xSecondRow = 35;
+      var yBlue = cardHeight + 55;
+      var radiusBlue = 20;
       for (i = 0; i < 8; i++) {
         if (i < 4) {
           ctx.beginPath();
@@ -47,7 +48,7 @@
           xFirstRow += 50;
           ctx.stroke();
         }
-        else {
+        else{
           ctx.beginPath();
           ctx.arc(xSecondRow, yBlue + radiusBlue * 2 + 10, 20, 0,2*Math.PI);
           xSecondRow += 50;

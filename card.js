@@ -1,4 +1,4 @@
-// create Card object
+// create Card constructor
 function Card(sideUp, color, number) {
   this.sideUp = sideUp;
   this.color = color;
