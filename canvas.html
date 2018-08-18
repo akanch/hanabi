@@ -92,11 +92,9 @@
     //newCard.draw();
     var newDeck = new Deck([1, 1, 1, 2, 2, 3, 3, 4, 4, 5]);
     newDeck.shuffle();
-    for (i = 0; i < newDeck.length; i++){
-      newDeck[i].draw();
-    }
-
-
+    for (i = 0; i < newDeck.cards.length; i++){
+      newDeck.cards[i].draw();
+    };
 
   </script>
 </html>

@@ -1,5 +1,5 @@
 // create Card object
-var Card = function(x, y, sideUp, color, number) {
+function Card(x, y, sideUp, color, number) {
   this.x = x;
   this.y = y;
   this.sideUp = sideUp;
