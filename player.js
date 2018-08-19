@@ -1,10 +1,9 @@
 // create player constructor
-function Player(hand, deck) {
+function Player(hand, hint) {
   this.hand = [];
-  for (i = 0; i < 5; i++) {
-    this.hand.push(deck.cards.pop());
+  this.hint = [];
   }
-//discard card function, a draw card function, give hint function, play card function
+//discard card function, a draw card function, give hint function, play card function, take a hint
 };
 
 // discard card function

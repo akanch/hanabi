@@ -60,9 +60,10 @@ function draw() {
 
   // test discard piles
   blueDiscard.add(newDeck.cards.pop());
-  greenDiscard.add(newDeck.cards.pop());
+  blueDiscard.add(newDeck.cards.pop());
 
 /*
+
   if (discarded.color == 'blue') {
     blueDiscard.add(discarded);
   }
@@ -79,11 +80,14 @@ function draw() {
 
   // draw discarded piles
   var discardPiles = [blueDiscard, greenDiscard, redDiscard, yellowDiscard];
+  yDiscard = 275;
+  deckX = 15;
   for (i = 0; i < 4; i++) {
-    for (j = 0; j < discardPiles[i].length; j++) {
-      discardPiles[i][j].draw(deckX, yDiscard);
+    for (j = 0; j < discardPiles[i].pile.length; j++) {
+      var currentPile = discardPiles[i];
+      currentPile.pile[j].draw(deckX, yDiscard);
       deckX += cardWidth + 5;
-    };
+    }
     yDiscard += cardHeight + 5;
   };
 
