@@ -9,7 +9,7 @@ function draw() {
   ctx.stroke();
 
   // slot for each color of discarded cards
-  yDiscard = 275;
+  var yDiscard = 275;
   for (i = 0; i < 4; i++) {
     ctx.rect(15, yDiscard, cardWidth, cardHeight);
     ctx.stroke();
@@ -42,6 +42,32 @@ function draw() {
       blue.draw(xSecondRow, ySecondRow);
       xSecondRow += 50;
     }
+
+    // discard piles
+    blueDiscard = new Discard();
+    greenDiscard = new Discard();
+    redDiscard = new Discard();
+    yellowDiscard = new Discard();
+
+    if (discarded.color == 'blue') {
+      blueDiscard.add(discarded);
+    }
+    else if (discarded.color == 'green') {
+      greenDiscard.add(discarded);
+    }
+    else if (discarded.color == 'red') {
+      redDiscard.add(discarded);
+    }
+    else {
+      yellowDiscard.add(discarded);
+    };
+    
+    // test discards
+    for (i = 0; i < 4; i++) {
+      ctx.rect(15, yDiscard, cardWidth, cardHeight);
+      ctx.stroke();
+      yDiscard += cardHeight + 5;
+    };
   };
 
   // red token slots
