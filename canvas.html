@@ -22,6 +22,8 @@
   <script type="text/javascript" src="card.js"></script>
   <script type="text/javascript" src="deck.js"></script>
   <script type="text/javascript" src="token.js"></script>
+  <script type="text/javascript" src="discard.js"></script>
+  <script type="text/javascript" src="player.js"></script>
 	<script>
 
     draw();
@@ -29,7 +31,7 @@
 
     // create Token object, blue tokens are for clues
 
-    	// blue tokens can be played for a clue or returned to the players for an extra clue if the player discards a card
+    	// blue tokens can be played sfor a clue or returned to the players for an extra clue if the player discards a card
 
     	// red tokens are give if a card is played wrongly
 
@@ -48,12 +50,6 @@
     // test for if card is face up or down
     //var newCard = new Card(100, 100, true, 'red', 2);
     //newCard.draw();
-    var newDeck = new Deck([1, 1, 1, 2, 2, 3, 3, 4, 4, 5]);
-    newDeck.shuffle();
-    for (i = 0; i < newDeck.cards.length; i++){
-      newDeck.cards[i].draw(deckX, deckY);
-      deckX += 10;
-    };
 
   </script>
 </html>

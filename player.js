@@ -11,4 +11,5 @@ function Player(hand, deck) {
 Player.prototype.discard = function() {
   discarded = this.hand.pop();
   // move discard to discard slots
+  return discarded;
 };
