@@ -2,13 +2,21 @@
 function Player(hand, hint) {
   this.hand = [];
   this.hint = [];
-  }
-//discard card function, a draw card function, give hint function, play card function, take a hint
 };
 
-// discard card function
-Player.prototype.discard = function() {
-  discarded = this.hand.pop();
+// release card function for discarding and playing cards
+Player.prototype.release = function() {
+  released = this.hand.pop();
   // move discard to discard slots
-  return discarded;
+  return released;
+};
+
+// draw a card from the deck
+Player.prototype.drawCard = function(deck) {
+  this.hand.push(deck.pop());
+};
+
+// receive a hint function
+Player.prototype.getHint = function(hint){
+  this.hint.push(hint);
 };

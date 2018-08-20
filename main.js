@@ -1,5 +1,5 @@
-// creating the board for the game
 function draw() {
+  // creating the board for the game
   ctx.rect(0, 0, windowX, windowY);
   ctx.fillStyle = '#6e777a';
   ctx.fill();
@@ -9,6 +9,7 @@ function draw() {
   ctx.stroke();
 
   // slot for each color of discarded cards
+  var deckX = 15;
   var yDiscard = 275;
   for (i = 0; i < 4; i++) {
     ctx.rect(deckX, yDiscard, cardWidth, cardHeight);
@@ -16,17 +17,10 @@ function draw() {
     yDiscard += cardHeight + 5;
   };
 
-  // shuffled deck created
-  var newDeck = new Deck([1, 1, 1, 2, 2, 3, 3, 4, 4, 5]);
-  newDeck.shuffle();
-  for (i = 0; i < newDeck.cards.length; i++){
-    newDeck.cards[i].draw(deckX, deckY);
-    deckX += 10;
-  };
-
   // blue token slots
   var xFirstRow = 35;
   var xSecondRow = 35;
+  var radiusBlue = 20;
   var yFirstRow = cardHeight + 55
   var ySecondRow = yFirstRow + + radiusBlue * 2 + 10;
   for (i = 0; i < 8; i++) {
@@ -50,6 +44,16 @@ function draw() {
       blue.draw(xSecondRow, ySecondRow);
       xSecondRow += 50;
     }
+  };
+
+  // shuffled deck created
+  var newDeck = new Deck([1, 1, 1, 2, 2, 3, 3, 4, 4, 5]);
+  deckX = 15;
+  var deckY = 15;
+  newDeck.shuffle();
+  for (i = 0; i < newDeck.cards.length; i++){
+    newDeck.cards[i].draw(deckX, deckY);
+    deckX += 10;
   };
 
   // discard piles
@@ -93,6 +97,7 @@ function draw() {
 
 
   // red token slots
+  var radiusRed = 30;
   xRed = xFirstRow + 30;
   yRed = cardHeight + 80;
   for (i = 0; i < 3; i++) {

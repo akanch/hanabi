@@ -11,14 +11,11 @@
   ctx.canvas.height = window.innerHeight;
   var windowX = window.innerWidth;
   var windowY = window.innerHeight;
-  var deckX = 15;
-  var deckY = 15;
-  var radiusBlue = 20;
-  var radiusRed = 30;
   </script>
 
   // import files
   <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="game.js"></script>
   <script type="text/javascript" src="card.js"></script>
   <script type="text/javascript" src="deck.js"></script>
   <script type="text/javascript" src="token.js"></script>
@@ -26,7 +23,9 @@
   <script type="text/javascript" src="player.js"></script>
 	<script>
 
-    draw();
+  setInterval(function() { draw() }, 20);
+
+
 
 
     // create Token object, blue tokens are for clues

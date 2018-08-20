@@ -7,6 +7,8 @@ function Token(color) {
 Token.prototype.draw = function(x, y) {
   ctx.beginPath();
   ctx.fillStyle = this.color;
+  var radiusBlue = 20;
+  var radiusRed = 30;
   if (this.color == '#d50000') {
     ctx.arc(x, y, radiusRed, 0,2*Math.PI);
     ctx.stroke();
