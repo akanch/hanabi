@@ -1,3 +1,5 @@
+// currently testing in game.js
+/*
 function draw() {
   // creating the board for the game
   ctx.rect(0, 0, windowX, windowY);
@@ -46,6 +48,7 @@ function draw() {
     }
   };
 
+
   // shuffled deck created
   var newDeck = new Deck([1, 1, 1, 2, 2, 3, 3, 4, 4, 5]);
   deckX = 15;
@@ -55,6 +58,7 @@ function draw() {
     newDeck.cards[i].draw(deckX, deckY);
     deckX += 10;
   };
+  */
 
   // discard piles
   blueDiscard = new Discard();

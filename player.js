@@ -1,5 +1,6 @@
 // create player constructor
-function Player(hand, hint) {
+function Player(name) {
+  this.name = name;
   this.hand = [];
   this.hint = [];
 };
