@@ -74,7 +74,7 @@ function drawRedTokens(wrongGuesses) {
 };
 
 // function to draw correctly played piles
-function drawCorrectSlots(correct) {
+function drawCorrectSlots() {
 	var deckX = 15;
 	var yCorrect = 275;
 	for (i = 0; i < 5; i++) {
@@ -100,11 +100,30 @@ function drawDiscards(discards) {
 
 };
 
+// function that draws the slots and the hands of the each player
+function drawPlayerHands(playerList) {
+	var y = 100;
+	for (i = 0; i < playerList.length; i++) {
+		var x = 400
+		for j = 0; j < playerList[i].hand.length; j++) {
+			playerList[i][j].draw(x, y);
+			x += cardWidth + 10;
+		}
+		y += cardHeight + 10;
+	}
+};
+
 // function for drawing the board with current configuration
 function drawBoard(config, playerList) {
-	draw token slots(config.hintsgiven)
-	draw tokens (blue)
-	draw test for red(config.wrongguesses)
+	drawBlueSlots();
+	drawRedSlots();
+	drawBlueTokens(config.numBlueTokens);
+	drawRedTokens(config.wrongGuesses);
+	drawCorrectSlots();
+	drawDiscardSlots();
+	drawDiscards(config.discards);
+	drawDeck(config.currentDeck);
+	drawPlayerHands(config.playerList);
 };
 
 runGame.js(empty config) //game just started
