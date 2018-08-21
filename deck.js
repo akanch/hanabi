@@ -1,6 +1,6 @@
 // Create a deck constructor
 function Deck(numbers) {
-  this.colors = ['blue', 'green', 'red', 'yellow'];
+  this.colors = ['blue', 'green', 'red', 'white', 'yellow'];
   this.numbers = numbers;
   this.cards = [];
   for (i = 0; i < this.colors.length; i++) {

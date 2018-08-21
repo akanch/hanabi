@@ -84,7 +84,7 @@ function draw() {
   else {
     yellowDiscard.add(discarded);
   };
-  */
+
 
   // draw discarded piles
   var discardPiles = [blueDiscard, greenDiscard, redDiscard, yellowDiscard];
@@ -113,5 +113,16 @@ function draw() {
     red = new Token('#d50000');
     red.draw(xRed, yRed);
     xRed += 70;
+  };
+};
+*/
+function Main() {
+  var deck = new Deck();
+  deck.shuffle();
+  var playerList = [];
+  dealcards[playerList];
+  var config(0, 0, deck, players);
+  if startGame == True {
+    runGame(config)
   };
 };
