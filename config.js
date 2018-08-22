@@ -1,10 +1,10 @@
 // function to storing the current configuration of the game
-function config(currentDeck, numBlueTokens, currentPlayer, playerList, discards, correctGuesses, wrongGuesses) { //config should be in its own file {
+function config(currentDeck, numBlueTokens, currentPlayer, playerList, discardPiles, correctGuesses, wrongGuesses) { //config should be in its own file {
 	this.currentDeck = currentDeck;
 	this.numBlueTokens = numBlueTokens;
   this.currentPlayer = currentPlayer;
   this.playerList = playerList;
-  this.discards = discards;
+  this.discardPiles = discardPiles;
   this.correctGuesses = correctGuesses;
   this.wrongGuesses = wrongGuesses;
 };
@@ -15,3 +15,4 @@ function config(currentDeck, numBlueTokens, currentPlayer, playerList, discards,
 // how does it capture the current configuration?
 // - if that's all the runGame function is, where does all of code
 // for updating the board go?
+// look at the transition from main() to game(). Where does drawboard go?

@@ -1,8 +1,4 @@
-  // discard piles
-  blueDiscard = new Discard();
-  greenDiscard = new Discard();
-  redDiscard = new Discard();
-  yellowDiscard = new Discard();
+
 
   // test discard piles
   blueDiscard.add(newDeck.cards.pop());
@@ -21,20 +17,6 @@
   }
   else {
     yellowDiscard.add(discarded);
-  };
-
-
-  // draw discarded piles
-  var discardPiles = [blueDiscard, greenDiscard, redDiscard, yellowDiscard];
-  yDiscard = 275;
-  deckX = 15;
-  for (i = 0; i < 4; i++) {
-    for (j = 0; j < discardPiles[i].pile.length; j++) {
-      var currentPile = discardPiles[i];
-      currentPile.pile[j].draw(deckX, yDiscard);
-      deckX += cardWidth + 5;
-    }
-    yDiscard += cardHeight + 5;
   };
 
 
@@ -58,8 +40,16 @@ function Main() {
   var deck = new Deck();
   deck.shuffle();
   var playerList = [];
+  // discard piles
+  var blueDiscard = new Discard();
+  var greenDiscard = new Discard();
+  var redDiscard = new Discard();
+  var whiteDiscard = new Discard();
+  var yellowDiscard = new Discard();
+  var discardPiles = [blueDiscard, greenDiscard, redDiscard, whiteDiscard, yellowDiscard]
+
   dealcards[playerList];
-  var config = new config(deck, 8, playerList[0], playerList.length(), [], 0, 0);
+  var config = new config(deck, 8, playerList[0], playerList.length(), discardPiles, 0, 0);
   if startGame == True {
     runGame(config)
   };

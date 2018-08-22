@@ -96,8 +96,16 @@ function drawDiscardSlots(discarded) {
 };
 
 // function that takes in a list of discarded cards and draws them
-function drawDiscards(discards) {
-
+function drawDiscardPiles(discardPiles) {
+	var deckX = 15;
+	var yDiscard = 275;
+	for (i in discardPiles.length) {
+		for (j in discardPiles[i].length) {
+			discardPiles[i][j].draw(deckX, yDiscard);
+			deckX += cardWidth + 5;
+		}
+		yDiscard += cardHeight + 5;
+	};
 };
 
 // function that draws the slots and the hands of the each player
@@ -121,9 +129,7 @@ function drawBoard(config, playerList) {
 	drawRedTokens(config.wrongGuesses);
 	drawCorrectSlots();
 	drawDiscardSlots();
-	drawDiscards(config.discards);
+	drawDiscards(config.discardPiles);
 	drawDeck(config.currentDeck);
 	drawPlayerHands(config.playerList);
 };
-
-runGame.js(empty config) //game just started
