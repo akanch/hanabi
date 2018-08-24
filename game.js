@@ -1,11 +1,14 @@
 function runGame(config) {
+    config.currentPlayer.turn = true;
     //ctx.font = "30px Arial";
-    //ctx.fillText("Hello World",10,50);
+    //ctx.fillText(config.playerList[4].turn,400,400);
+    var y = 400;
+    for (var i = 0; i < config.playerList.length; i++) {
+      if (config.playerList[i].turn == false) {
+        config.playerList[i].revealHand();
+      }
+    };
     drawBoard(config);
-    //for (i = 0; i < config.currentPlayer.handconfig.currentPlayer.hand
-    //for (i = 0; i < config.playerList; i++) {
-
-    //}
     //config = update(config);
 
     //if (config.wrongGuesses == 3) {

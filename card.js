@@ -4,7 +4,7 @@ function Card(sideUp, color, number) {
   this.color = color;
   this.number = number;
   this.colorHint = false;
-  this.numberHint = true;
+  this.numberHint = false;
 };
 
 // draw a card
@@ -19,12 +19,16 @@ Card.prototype.draw = function(x, y) {
     ctx.fillStyle = "black";
     ctx.fillText(this.number, x + (cardWidth/2), y + (cardHeight/2) + 8);
   }
+
+  // if a color hint is attached to the card
   else if (this.colorHint == true) {
     ctx.fillStyle = this.color;
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "black";
     ctx.strokeRect(x, y, cardWidth, cardHeight);
   }
+
+  // if a number hint is attached to the card
   else if (this.numberHint == true) {
     ctx.fillStyle = "black";
     ctx.fillRect(x, y, cardWidth, cardHeight);
