@@ -2,9 +2,10 @@
 function drawDeck(deck) {
 	var deckX = 15;
 	var deckY = 15;
-	for (i = 0; i < deck.cards.length; i++){
+	for (i = 0; i < deck.cards.length; i++) {
     deck.cards[i].draw(deckX, deckY);
     deckX += 10;
+	};
 };
 
 // function for drawing blue token slots
@@ -13,8 +14,8 @@ function drawBlueSlots() {
 	var xFirstRow = 35;
 	var xSecondRow = 35;
 	var radiusBlue = 20;
-	var yFirstRow = cardHeight + 55
-	var ySecondRow = yFirstRow + + radiusBlue * 2 + 10;
+	var yFirstRow = cardHeight + 50;
+	var ySecondRow = yFirstRow + radiusBlue * 2 + 5;
 	for (i = 0; i < 8; i++) {
 	  if (i < 4) {
 	    ctx.beginPath();
@@ -22,63 +23,67 @@ function drawBlueSlots() {
 	    ctx.stroke();
 	    xFirstRow += 50;
 	  }
-	  else{
+	  else {
 	    ctx.beginPath();
 	    ctx.arc(xSecondRow, ySecondRow, radiusBlue, 0,2*Math.PI);
 	    ctx.stroke();
 	    xSecondRow += 50;
-	  }
-;}
+	  };
+	};
+};
 
 // function for drawing red token slots
 function drawRedSlots() {
 	var radiusRed = 30;
-  var xRed = xFirstRow + 30;
-  var yRed = cardHeight + 80;
+  var xRed = 275;
+  var yRed = cardHeight + 70;
   for (i = 0; i < 3; i++) {
     ctx.beginPath();
     ctx.arc(xRed, yRed, radiusRed, 0,2*Math.PI);
     ctx.stroke();
     xRed += 70;
+	};
 };
 
 // function takes in number of blue tokens to draw and draws them
 function drawBlueTokens(num) {
 	var xFirstRow = 35;
 	var xSecondRow = 35;
+	var radiusBlue = 20;
 	var yFirstRow = cardHeight + 55;
-	var ySecondRow = yFirstRow + + radiusBlue * 2 + 10;
-		for (i = num.length - 1; i < 0; i--){
-			if (i < 4){
-				blue = new Token('#02a8ff');
-		    blue.draw(xFirstRow, yFirstRow);
-		    xFirstRow += 50;
-			};
-			else {
-				blue = new Token('#02a8ff');
-				blue.draw(xSecondRow, ySecondRow);
-				xSecondRow += 50;
-			}
+	var ySecondRow = yFirstRow + radiusBlue * 2 + 10;
+	for (i = num.length - 1; i < 0; i--) {
+		if (i < 4) {
+			blue = new Token('#02a8ff');
+	    blue.draw(xFirstRow, yFirstRow);
+	    xFirstRow += 50;
 		}
+		else {
+			blue = new Token('#02a8ff');
+			blue.draw(xSecondRow, ySecondRow);
+			xSecondRow += 50;
+		}
+	};
 };
 
 // function that takes in the number of wrong guess and draws red tokens
 function drawRedTokens(wrongGuesses) {
 	var radiusRed = 30;
-	var xRed = xFirstRow + 30;
+	var xRed = 275;
 	var yRed = cardHeight + 80;
-	for (i = 0; i < wongGuesses.length; i++) {
+	for (i = 0; i < wrongGuesses.length; i++) {
 		red = new Token('#d50000');
 		red.draw(xRed, yRed);
 		xRed += 70;
+	};
 };
 
 // function to draw correctly played piles
 function drawCorrectSlots() {
 	var deckX = 15;
-	var yCorrect = 275;
+	var yCorrect = 220;
 	for (i = 0; i < 5; i++) {
-	  ctx.rect(deckX, yDiscard, cardWidth, cardHeight);
+	  ctx.rect(deckX, yCorrect, cardWidth, cardHeight);
 	  ctx.stroke();
 	  deckX += cardWidth + 5;
 	};
@@ -87,7 +92,7 @@ function drawCorrectSlots() {
 // function that draws the discard slots
 function drawDiscardSlots(discarded) {
 	var deckX = 15;
-	var yDiscard = 275;
+	var yDiscard = 240 + cardHeight;
 	for (i = 0; i < 5; i++) {
 	  ctx.rect(deckX, yDiscard, cardWidth, cardHeight);
 	  ctx.stroke();
@@ -99,8 +104,8 @@ function drawDiscardSlots(discarded) {
 function drawDiscardPiles(discardPiles) {
 	var deckX = 15;
 	var yDiscard = 275;
-	for (i in discardPiles.length) {
-		for (j in discardPiles[i].length) {
+	for (i = 0; i < discardPiles.length; i++) {
+		for (j = 0; j < discardPiles[i].length; j++) {
 			discardPiles[i][j].draw(deckX, yDiscard);
 			deckX += cardWidth + 5;
 		}
@@ -110,26 +115,32 @@ function drawDiscardPiles(discardPiles) {
 
 // function that draws the slots and the hands of the each player
 function drawPlayerHands(playerList) {
-	var y = 100;
+	var y = 50;
 	for (i = 0; i < playerList.length; i++) {
-		var x = 400
-		for j = 0; j < playerList[i].hand.length; j++) {
-			playerList[i][j].draw(x, y);
-			x += cardWidth + 10;
+		var x = windowX - cardWidth * 6;
+		for (j = 0; j < playerList[i].hand.length; j++) {
+			playerList[i].hand[j].draw(x, y);
+			x += cardWidth + 2;
 		}
 		y += cardHeight + 10;
-	}
+	};
 };
 
 // function for drawing the board with current configuration
-function drawBoard(config, playerList) {
+function drawBoard(config) {
+	// creating the board for the game
+	//ctx.font = "30px Arial";
+	//ctx.fillText("Hello World",10,50);
+	//ctx.rect(0, 0, windowX, windowY);
+	//ctx.fillStyle = '#6e777a';
+	//ctx.fill();
 	drawBlueSlots();
 	drawRedSlots();
 	drawBlueTokens(config.numBlueTokens);
 	drawRedTokens(config.wrongGuesses);
 	drawCorrectSlots();
 	drawDiscardSlots();
-	drawDiscards(config.discardPiles);
+	drawDiscardPiles(config.discardPiles);
 	drawDeck(config.currentDeck);
 	drawPlayerHands(config.playerList);
 };

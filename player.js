@@ -18,6 +18,6 @@ Player.prototype.drawCard = function(deck) {
 };
 
 // receive a hint function
-Player.prototype.getHint = function(hint){
+Player.prototype.getHint = function(hint) {
   this.hint.push(hint);
 };

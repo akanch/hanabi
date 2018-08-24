@@ -3,8 +3,8 @@
 	</canvas>
   <script>
   // global variables go here
-  var cardWidth = 100;
-  var cardHeight = 125;
+  var cardWidth = 75;
+  var cardHeight = 90;
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext('2d');
   ctx.canvas.width = window.innerWidth;
@@ -13,9 +13,9 @@
   var windowY = window.innerHeight;
   </script>
 
-  // import files
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="game.js"></script>
+  <script type="text/javascript" src="ui.js"></script>
   <script type="text/javascript" src="card.js"></script>
   <script type="text/javascript" src="deck.js"></script>
   <script type="text/javascript" src="token.js"></script>
@@ -23,8 +23,10 @@
   <script type="text/javascript" src="player.js"></script>
   <script type="text/javascript" src="config.js"></script>
 	<script>
-
-  setInterval(function() { draw() }, 20);
+  ctx.rect(0, 0, windowX, windowY);
+  ctx.fillStyle = '#6e777a';
+  ctx.fill();
+  Main();
 
 
 

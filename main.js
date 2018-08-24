@@ -1,8 +1,8 @@
 
 
   // test discard piles
-  blueDiscard.add(newDeck.cards.pop());
-  blueDiscard.add(newDeck.cards.pop());
+  //blueDiscard.add(newDeck.cards.pop());
+  //blueDiscard.add(newDeck.cards.pop());
 
 /*
 
@@ -46,11 +46,43 @@ function Main() {
   var redDiscard = new Discard();
   var whiteDiscard = new Discard();
   var yellowDiscard = new Discard();
-  var discardPiles = [blueDiscard, greenDiscard, redDiscard, whiteDiscard, yellowDiscard]
+  var discardPiles = [blueDiscard, greenDiscard, redDiscard, whiteDiscard, yellowDiscard];
+  var playerOne = new Player("Sophmonster");
+  var playerTwo = new Player("mr. money bags");
+  var playerThree = new Player("Eugene");
+  var playerFour = new Player("Chinese New Year");
+  var playerFive = new Player("Filabani");
+  var playerList = [playerOne, playerTwo, playerThree, playerFour, playerFive];
 
-  dealcards[playerList];
-  var config = new config(deck, 8, playerList[0], playerList.length(), discardPiles, 0, 0);
-  if startGame == True {
-    runGame(config)
+  // finding the width of the longest player name
+  var longestName = "";
+  for (i = 0; i < playerList.length; i++) {
+    if (playerList[i].name.length > longestName.length) {
+      longestName = playerList[i].name;
+    };
+  };
+  ctx.font = "20px Arial";
+  nameWidth = ctx.measureText(longestName).width;
+
+  // labelling player hands
+  var y = 80;
+  var x = 1000 - nameWidth - 30;
+  for (var i = 0; i < playerList.length; i++) {
+    ctx.beginPath();
+    ctx.rect(x - 10, y - 20, nameWidth + 20, 30);
+  	ctx.fillStyle = '#6e777a';
+  	ctx.fill();
+    ctx.font = "20px Arial";
+    ctx.fillStyle = 'black'
+    ctx.fillText(playerList[i].name,x,y);
+    y += 100;
+    deck.deal(playerList[i]);
+  };
+
+  // creating starting configuration
+  var config = new Config(deck, 8, playerList[0], playerList, discardPiles, 0, 0, true);
+  var startGame = true;
+  if (startGame == true) {
+    runGame(config);
   };
 };

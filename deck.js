@@ -1,13 +1,13 @@
 // Create a deck constructor
-function Deck(numbers) {
+function Deck() {
   this.colors = ['blue', 'green', 'red', 'white', 'yellow'];
-  this.numbers = numbers;
+  this.numbers = [1, 1, 1, 2, 2, 3, 3, 4, 4, 5];
   this.cards = [];
   for (i = 0; i < this.colors.length; i++) {
-    for (j = 0; j < this.numbers.length; j++){
+    for (j = 0; j < this.numbers.length; j++) {
       this.cards.push(new Card(true, this.colors[i], this.numbers[j]));
     }
-  }
+  };
 };
 
 // Fisher-Yates shuffle function
@@ -18,5 +18,12 @@ Deck.prototype.shuffle = function() {
     var tempQ = this.cards[q];
     this.cards[k] = tempQ;
     this.cards[q] = tempK;
+  };
+};
+
+// function to deal cards to each player at the start of the game
+Deck.prototype.deal = function(player) {
+  for (i = 0; i < 5; i++) {
+    player.drawCard(this.cards);
   };
 };

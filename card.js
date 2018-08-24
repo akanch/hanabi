@@ -7,7 +7,7 @@ function Card(sideUp, color, number) {
 
 // draw a card
 Card.prototype.draw = function(x, y) {
-  if (this.sideUp === true) {
+  if (this.sideUp == true) {
     ctx.fillStyle = this.color;
   }
   else {

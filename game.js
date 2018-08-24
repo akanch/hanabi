@@ -1,16 +1,19 @@
 function runGame(config) {
-  while true {
-    config = update(config);
+  //while (config.gameOn == true) {
+    //ctx.font = "30px Arial";
+    //ctx.fillText("Hello World",10,50);
+    drawBoard(config);
+    //config = update(config);
 
-    if (config.wrongGuesses == 3) {
+    //if (config.wrongGuesses == 3) {
       // return lose and break
-    };
-  };
+    //};
+  //};
 };
 
 // update the configuration of the game
 function update(config) {
-  config.wrongGuesses
+  config.wrongGuesses;
 };
 /*
 function Game(playerList) {
@@ -59,3 +62,4 @@ ctx.stroke();
 
   //
 };
+*/
