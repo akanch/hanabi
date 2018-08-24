@@ -50,9 +50,9 @@ function drawBlueTokens(num) {
 	var xFirstRow = 35;
 	var xSecondRow = 35;
 	var radiusBlue = 20;
-	var yFirstRow = cardHeight + 55;
-	var ySecondRow = yFirstRow + radiusBlue * 2 + 10;
-	for (i = num.length - 1; i < 0; i--) {
+	var yFirstRow = cardHeight + 50;
+	var ySecondRow = yFirstRow + radiusBlue * 2 + 5;
+	for (i = 0; i < num; i++) {
 		if (i < 4) {
 			blue = new Token('#02a8ff');
 	    blue.draw(xFirstRow, yFirstRow);
@@ -62,7 +62,7 @@ function drawBlueTokens(num) {
 			blue = new Token('#02a8ff');
 			blue.draw(xSecondRow, ySecondRow);
 			xSecondRow += 50;
-		}
+		};
 	};
 };
 
@@ -122,18 +122,36 @@ function drawPlayerHands(playerList) {
 			playerList[i].hand[j].draw(x, y);
 			x += cardWidth + 2;
 		}
-		y += cardHeight + 10;
+		y += cardHeight + 60;
+	};
+};
+
+// function that labels each player's hands with their name
+function labelHands(playerList) {
+	// finding the width of the longest player name
+	var longestName = "";
+	for (i = 0; i < playerList.length; i++) {
+		if (playerList[i].name.length > longestName.length) {
+			longestName = playerList[i].name;
+		};
+	};
+	ctx.font = "20px Arial";
+	nameWidth = ctx.measureText(longestName).width;
+	var y = 100;
+  var x = 1050 - nameWidth;
+	for (var i = 0; i < playerList.length; i++) {
+		ctx.font = "20px Arial";
+		ctx.fillStyle = 'black'
+		ctx.fillText(playerList[i].name,x,y);
+		y += 150;
 	};
 };
 
 // function for drawing the board with current configuration
 function drawBoard(config) {
-	// creating the board for the game
-	//ctx.font = "30px Arial";
-	//ctx.fillText("Hello World",10,50);
-	//ctx.rect(0, 0, windowX, windowY);
-	//ctx.fillStyle = '#6e777a';
-	//ctx.fill();
+	ctx.rect(0, 0, windowX, windowY);
+	ctx.fillStyle = '#6e777a';
+	ctx.fill();
 	drawBlueSlots();
 	drawRedSlots();
 	drawBlueTokens(config.numBlueTokens);
@@ -143,4 +161,5 @@ function drawBoard(config) {
 	drawDiscardPiles(config.discardPiles);
 	drawDeck(config.currentDeck);
 	drawPlayerHands(config.playerList);
+	labelHands(config.playerList);
 };

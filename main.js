@@ -54,28 +54,8 @@ function Main() {
   var playerFive = new Player("Filabani");
   var playerList = [playerOne, playerTwo, playerThree, playerFour, playerFive];
 
-  // finding the width of the longest player name
-  var longestName = "";
-  for (i = 0; i < playerList.length; i++) {
-    if (playerList[i].name.length > longestName.length) {
-      longestName = playerList[i].name;
-    };
-  };
-  ctx.font = "20px Arial";
-  nameWidth = ctx.measureText(longestName).width;
-
-  // labelling player hands
-  var y = 80;
-  var x = 1000 - nameWidth - 30;
+  // deal cards to each player
   for (var i = 0; i < playerList.length; i++) {
-    ctx.beginPath();
-    ctx.rect(x - 10, y - 20, nameWidth + 20, 30);
-  	ctx.fillStyle = '#6e777a';
-  	ctx.fill();
-    ctx.font = "20px Arial";
-    ctx.fillStyle = 'black'
-    ctx.fillText(playerList[i].name,x,y);
-    y += 100;
     deck.deal(playerList[i]);
   };
 

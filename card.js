@@ -21,7 +21,7 @@ Card.prototype.draw = function(x, y) {
   ctx.font = "30px Arial";
   ctx.textAlign = "center";
   ctx.fillStyle = "black";
-  ctx.fillText(this.number, x + (cardWidth/2), y + (cardHeight/2));
+  ctx.fillText(this.number, x + (cardWidth/2), y + (cardHeight/2) + 8);
 };
 
 // cards can have hints attached to them
