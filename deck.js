@@ -5,7 +5,7 @@ function Deck() {
   this.cards = [];
   for (i = 0; i < this.colors.length; i++) {
     for (j = 0; j < this.numbers.length; j++) {
-      this.cards.push(new Card(true, this.colors[i], this.numbers[j]));
+      this.cards.push(new Card(false, this.colors[i], this.numbers[j]));
     }
   };
 };

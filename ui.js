@@ -70,8 +70,8 @@ function drawBlueTokens(num) {
 function drawRedTokens(wrongGuesses) {
 	var radiusRed = 30;
 	var xRed = 275;
-	var yRed = cardHeight + 80;
-	for (i = 0; i < wrongGuesses.length; i++) {
+	var yRed = cardHeight + 70;
+	for (i = 0; i < wrongGuesses; i++) {
 		red = new Token('#d50000');
 		red.draw(xRed, yRed);
 		xRed += 70;
@@ -141,8 +141,9 @@ function labelHands(playerList) {
   var x = 1050 - nameWidth;
 	for (var i = 0; i < playerList.length; i++) {
 		ctx.font = "20px Arial";
+		ctx.textAlign = "center";
 		ctx.fillStyle = 'black'
-		ctx.fillText(playerList[i].name,x,y);
+		ctx.fillText(playerList[i].name, x, y);
 		y += 150;
 	};
 };
