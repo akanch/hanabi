@@ -26,6 +26,7 @@ Card.prototype.draw = function(x, y) {
     ctx.strokeRect(x, y, cardWidth, cardHeight);
   }
   else if (this.numberHint == true) {
+    ctx.fillStyle = "black";
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "white";
     ctx.strokeRect(x, y, cardWidth, cardHeight);
@@ -33,10 +34,10 @@ Card.prototype.draw = function(x, y) {
     ctx.textAlign = "center";
     ctx.fillStyle = "white";
     ctx.fillText(this.number, x + (cardWidth/2), y + (cardHeight/2) + 8);
-    ctx.fillStyle = "black";
   }
   else {
     ctx.fillStyle = 'black';
+    ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "white";
     ctx.strokeRect(x, y, cardWidth, cardHeight);
   }
