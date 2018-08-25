@@ -102,11 +102,14 @@ function drawDiscardSlots(discarded) {
 
 // function that takes in a list of discarded cards and draws them
 function drawDiscardPiles(discardPiles) {
-	var deckX = 15;
-	var yDiscard = 275;
+	var yDiscard = 240 + cardHeight;
 	for (i = 0; i < discardPiles.length; i++) {
-		for (j = 0; j < discardPiles[i].length; j++) {
-			discardPiles[i][j].draw(deckX, yDiscard);
+		var deckX = 15;
+		//ctx.font = "30px Arial";
+		//ctx.fillText(discardPiles[i],deckX, yDiscard);
+		for (j = 0; j < discardPiles[i].pile.length; j++) {
+			discardPiles[i].pile[j].sideUp = true;
+			discardPiles[i].pile[j].draw(deckX, yDiscard);
 			deckX += cardWidth + 5;
 		}
 		yDiscard += cardHeight + 5;
@@ -150,9 +153,9 @@ function labelHands(playerList) {
 
 // function for drawing the board with current configuration
 function drawBoard(config) {
-	ctx.rect(0, 0, windowX, windowY);
-	ctx.fillStyle = '#6e777a';
-	ctx.fill();
+	//ctx.rect(0, 0, windowX, windowY);
+	//ctx.fillStyle = '#6e777a';
+	//ctx.fill();
 	drawBlueSlots();
 	drawRedSlots();
 	drawBlueTokens(config.numBlueTokens);

@@ -8,6 +8,20 @@ function runGame(config) {
         config.playerList[i].revealHand();
       }
     };
+    // test discard and release function, works
+    var discarded = config.currentPlayer.release();
+    config.discardPiles[2].add(discarded);
+    discarded = config.currentPlayer.release();
+    config.discardPiles[0].add(discarded);
+    discarded = config.currentPlayer.release();
+    config.discardPiles[1].add(discarded);
+    discarded = config.currentPlayer.release();
+    config.discardPiles[3].add(discarded);
+    discarded = config.currentPlayer.release();
+    config.discardPiles[4].add(discarded);
+    
+    // test drawCard function, works
+    config.currentPlayer.drawCard(config.currentDeck.cards);
     drawBoard(config);
     //config = update(config);
 
