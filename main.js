@@ -60,7 +60,7 @@ function Main() {
   };
 
   // creating starting configuration
-  var config = new Config(deck, 8, playerList[0], playerList, discardPiles, 0, 0, true);
+  var config = new Config(deck, 8, playerList[0], playerList, discardPiles, [], 0, true);
   var startGame = true;
   if (startGame == true) {
     runGame(config);

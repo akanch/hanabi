@@ -9,6 +9,7 @@ function runGame(config) {
       }
     };
     // test discard and release function, works
+    /*
     var discarded = config.currentPlayer.release();
     config.discardPiles[2].add(discarded);
     discarded = config.currentPlayer.release();
@@ -19,9 +20,22 @@ function runGame(config) {
     config.discardPiles[3].add(discarded);
     discarded = config.currentPlayer.release();
     config.discardPiles[4].add(discarded);
-    
+
     // test drawCard function, works
     config.currentPlayer.drawCard(config.currentDeck.cards);
+
+    // test drawing correct piles
+    config.correctGuesses.push(config.playerList[1].release());
+    config.correctGuesses.push(config.playerList[1].release());
+    config.correctGuesses.push(config.playerList[2].release());
+    config.correctGuesses.push(config.playerList[2].release());
+    config.correctGuesses.push(config.playerList[3].release());
+    config.correctGuesses.push(config.playerList[3].release());
+    config.correctGuesses.push(config.playerList[4].release());
+    config.correctGuesses.push(config.playerList[4].release());
+    config.correctGuesses.push(config.playerList[4].release());
+    */
+
     drawBoard(config);
     //config = update(config);
 
