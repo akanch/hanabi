@@ -53,6 +53,7 @@ function Main() {
   var playerFour = new Player("Chinese New Year");
   var playerFive = new Player("Filabani");
   var playerList = [playerOne, playerTwo, playerThree, playerFour, playerFive];
+  var handSlots = [];
 
   // deal cards to each player
   for (var i = 0; i < playerList.length; i++) {
@@ -60,7 +61,7 @@ function Main() {
   };
 
   // creating starting configuration
-  var config = new Config(deck, 8, playerList[0], playerList, discardPiles, [], 0, true);
+  var config = new Config(deck, 8, playerList[0], playerList, discardPiles, [], 0, handSlots, true);
   var startGame = true;
   if (startGame == true) {
     runGame(config);

@@ -11,12 +11,16 @@ function runGame(config) {
 
     //document.addEventListener('click',  getClickPos);
     document.addEventListener('click', update(config));
-    //console.log(config);
-    //document.addEventListener('click', update.bind(null, config));
 
 
-    // test discard and release function, works
+
+
+    drawBoard(config);
+
+
     /*
+    // test discard and release function, works
+
     var discarded = config.currentPlayer.release();
     config.discardPiles[2].add(discarded);
     discarded = config.currentPlayer.release();
@@ -43,7 +47,7 @@ function runGame(config) {
     config.correctGuesses.push(config.playerList[4].release());
     */
 
-    drawBoard(config);
+    //drawBoard(config);
     //config = update(config);
 
     //if (config.wrongGuesses == 3) {
@@ -62,6 +66,13 @@ function update(config) {
   return function(event) {
     config.x = event.pageX;
     config.y = event.pageY;
+    for (var i = 0; i < config.handSlots.length; i++) {
+      config.handSlots[i].ifSelect(config.x, config.y);
+      if (config.handSlots[i].selected == true) {
+        drawSelected(config.handSlots[i]);
+      }
+    };
+    console.log(config.x, config.y);
   };
 };
 /*

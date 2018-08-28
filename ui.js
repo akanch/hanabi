@@ -144,17 +144,25 @@ function drawDiscardPiles(discardPiles) {
 };
 
 // function that draws the slots and the hands of the each player
-function drawPlayerHands(playerList) {
+function drawPlayerHands(playerList, handSlots) {
 	var y = 50;
 	for (i = 0; i < playerList.length; i++) {
 		var x = windowX - cardWidth * 6;
 		for (j = 0; j < playerList[i].hand.length; j++) {
+			handSlots.push(new HandSlot(playerList[i].hand[j], x, y));
 			playerList[i].hand[j].draw(x, y);
 			x += cardWidth + 1;
 		}
 		y += cardHeight + 60;
 	};
 };
+
+function drawSelected(handSlot) {
+	console.log(handSlot);
+	ctx.strokeStyle = '#e07ac3';
+	ctx.lineWidth = 5;
+	ctx.strokeRect(handSlot.cardX, handSlot.cardY, cardWidth, cardHeight);
+}
 
 // function that labels each player's hands with their name
 function labelHands(playerList) {
@@ -229,7 +237,7 @@ function drawBoard(config) {
 	drawDiscardSlots();
 	drawDiscardPiles(config.discardPiles);
 	drawDeck(config.currentDeck);
-	drawPlayerHands(config.playerList);
+	drawPlayerHands(config.playerList, config.handSlots);
 	drawHintBoard();
 	labelHands(config.playerList);
 	labelSelectedCard(config.currentPlayer.hand[0]);

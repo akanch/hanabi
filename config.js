@@ -1,5 +1,5 @@
 // function to storing the current configuration of the game
-function Config(currentDeck, numBlueTokens, currentPlayer, playerList, discardPiles, correctGuesses, numWrongGuesses, gameOn) { //config should be in its own file {
+function Config(currentDeck, numBlueTokens, currentPlayer, playerList, discardPiles, correctGuesses, numWrongGuesses, handSlots, gameOn) { //config should be in its own file {
 	this.currentDeck = currentDeck;
 	this.numBlueTokens = numBlueTokens;
   this.currentPlayer = currentPlayer;
@@ -7,6 +7,7 @@ function Config(currentDeck, numBlueTokens, currentPlayer, playerList, discardPi
   this.discardPiles = discardPiles;
   this.correctGuesses = correctGuesses;
   this.numWrongGuesses = numWrongGuesses;
+	this.handSlots = handSlots;
 	this.gameOn = gameOn;
 	this.x = 0;
 	this.y = 0;
