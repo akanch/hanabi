@@ -11,12 +11,9 @@ function runGame(config) {
 
     //document.addEventListener('click',  getClickPos);
     document.addEventListener('click', update(config));
-
-
-
-
-    drawBoard(config);
-
+    setInterval(function() {
+      drawBoard(config);
+    }, 1000);
 
     /*
     // test discard and release function, works
@@ -53,6 +50,8 @@ function runGame(config) {
     //if (config.wrongGuesses == 3) {
       // return lose and break
     //};
+    //window.setInterval(drawBoard(config), 20);
+
 };
 
 function getClickPos(event) {
@@ -69,12 +68,16 @@ function update(config) {
     for (var i = 0; i < config.handSlots.length; i++) {
       config.handSlots[i].ifSelect(config.x, config.y);
       drawSelected(config.handSlots[i]);
-      //console.log(config.handSlots[i].selected);
+      console.log(config.handSlots[i]);
     };
-    //console.log(config.x, config.y);
   };
-  drawBoard(config);
 };
+
+function hello() {
+  console.log('hello');
+}
+
+
 /*
 function Game(playerList) {
 // creating the board for the game

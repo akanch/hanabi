@@ -43,6 +43,7 @@ Card.prototype.draw = function(x, y) {
     ctx.fillStyle = 'black';
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "white";
+    ctx.lineWidth = 1;
     ctx.strokeRect(x, y, cardWidth, cardHeight);
   }
 };
