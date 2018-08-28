@@ -178,6 +178,7 @@ function labelHands(playerList) {
 	};
 };
 
+// draw hint board
 function drawHintBoard() {
 	var xFirstRow = 475;
 	var yFirstRow = 60;
@@ -206,6 +207,13 @@ function drawHintBoard() {
 	};
 };
 
+function labelSelectedCard(card) {
+
+	//var x = coordinates.top;
+	//var y = coordinates.left;
+	//card.draw(x, y + 10);
+};
+
 
 // function for drawing the board with current configuration
 function drawBoard(config) {
@@ -224,4 +232,5 @@ function drawBoard(config) {
 	drawPlayerHands(config.playerList);
 	drawHintBoard();
 	labelHands(config.playerList);
+	labelSelectedCard(config.currentPlayer.hand[0]);
 };

@@ -8,6 +8,10 @@ function runGame(config) {
         config.playerList[i].revealHand();
       }
     };
+
+    //document.addEventListener('click',  getClickPos);
+    document.addEventListener('click',  getClickPos);
+
     // test discard and release function, works
     /*
     var discarded = config.currentPlayer.release();
@@ -42,6 +46,13 @@ function runGame(config) {
     //if (config.wrongGuesses == 3) {
       // return lose and break
     //};
+};
+
+function getClickPos(event) {
+  var x = event.clientX;
+  var y = event.clientY;
+  //console.log(clickX, clickY);
+  return (x, y);
 };
 
 // update the configuration of the game
