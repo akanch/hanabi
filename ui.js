@@ -158,10 +158,16 @@ function drawPlayerHands(playerList, handSlots) {
 };
 
 function drawSelected(handSlot) {
-	console.log(handSlot);
-	ctx.strokeStyle = '#e07ac3';
-	ctx.lineWidth = 5;
-	ctx.strokeRect(handSlot.cardX, handSlot.cardY, cardWidth, cardHeight);
+	if (handSlot.selected == true) {
+		ctx.strokeStyle = '#e07ac3';
+		ctx.lineWidth = 5;
+		ctx.strokeRect(handSlot.cardX, handSlot.cardY, cardWidth, cardHeight);
+	}
+	else if (handSlot.selected == false) {
+		ctx.strokeStyle = 'black';
+		ctx.lineWidth = 0.5;
+		ctx.strokeRect(handSlot.cardX, handSlot.cardY, cardWidth, cardHeight);
+	}
 }
 
 // function that labels each player's hands with their name

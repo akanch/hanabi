@@ -10,7 +10,12 @@ function HandSlot(card, cardX, cardY) {
 HandSlot.prototype.ifSelect = function(currentX, currentY) {
   if (currentX < this.cardX + cardWidth && currentX > this.cardX
   && currentY < this.cardY + cardHeight && currentY > this.cardY
-  && this.card != null) {
+  && this.card != null && this.selected == false) {
     this.selected = true;
   }
+  else if (currentX < this.cardX + cardWidth && currentX > this.cardX
+  && currentY < this.cardY + cardHeight && currentY > this.cardY
+  && this.selected == true) {
+    this.selected = false;
+  };
 };

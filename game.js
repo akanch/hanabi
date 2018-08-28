@@ -68,12 +68,12 @@ function update(config) {
     config.y = event.pageY;
     for (var i = 0; i < config.handSlots.length; i++) {
       config.handSlots[i].ifSelect(config.x, config.y);
-      if (config.handSlots[i].selected == true) {
-        drawSelected(config.handSlots[i]);
-      }
+      drawSelected(config.handSlots[i]);
+      //console.log(config.handSlots[i].selected);
     };
-    console.log(config.x, config.y);
+    //console.log(config.x, config.y);
   };
+  drawBoard(config);
 };
 /*
 function Game(playerList) {
