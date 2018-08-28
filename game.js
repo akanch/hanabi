@@ -10,7 +10,10 @@ function runGame(config) {
     };
 
     //document.addEventListener('click',  getClickPos);
-    document.addEventListener('click',  getClickPos);
+    document.addEventListener('click', update(config));
+    //console.log(config);
+    //document.addEventListener('click', update.bind(null, config));
+
 
     // test discard and release function, works
     /*
@@ -51,13 +54,15 @@ function runGame(config) {
 function getClickPos(event) {
   var x = event.clientX;
   var y = event.clientY;
-  //console.log(clickX, clickY);
-  return (x, y);
+  console.log(x, y);
 };
 
 // update the configuration of the game
 function update(config) {
-  config.wrongGuesses;
+  return function(event) {
+    config.x = event.pageX;
+    config.y = event.pageY;
+  };
 };
 /*
 function Game(playerList) {

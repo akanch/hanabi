@@ -234,3 +234,7 @@ function drawBoard(config) {
 	labelHands(config.playerList);
 	labelSelectedCard(config.currentPlayer.hand[0]);
 };
+
+
+// draw slots that track position of cards and hints, it takes a card ofject, and clicked x and y pos
+// find better name for updating config.x and config.y
