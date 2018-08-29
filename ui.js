@@ -146,29 +146,47 @@ function drawDiscardPiles(discardPiles) {
 // function that draws the slots and the hands of the each player
 function drawPlayerHands(playerList, handSlots) {
 	var y = 50;
-	for (i = 0; i < playerList.length; i++) {
-		var x = windowX - cardWidth * 6;
-		for (j = 0; j < playerList[i].hand.length; j++) {
-			handSlots.push(new HandSlot(playerList[i].hand[j], x, y));
-			playerList[i].hand[j].draw(x, y);
-			x += cardWidth + 1;
+	if (handSlots.length == 0) {
+		for (i = 0; i < playerList.length; i++) {
+			var x = windowX - cardWidth * 6;
+			for (j = 0; j < playerList[i].hand.length; j++) {
+				handSlots.push(new HandSlot(playerList[i].hand[j], x, y));
+				playerList[i].hand[j].draw(x, y);
+				x += cardWidth + 1;
+				}
+			y += cardHeight + 60;
 		}
-		y += cardHeight + 60;
+	}
+	else if (handSlots.length != 0) {
+		console.log(handSlots);
+		y = 50;
+		for (i = 0; i < playerList.length; i++) {
+			var x = windowX - cardWidth * 6;
+			for (j = 0; j < playerList[i].hand.length; j++) {
+				playerList[i].hand[j].draw(x, y);
+				x += cardWidth + 1;
+			}
+			y += cardHeight + 60;
+		}
 	};
+	//console.log(handSlots);
+	drawSelected(handSlots);
 };
 
-function drawSelected(handSlot) {
-	if (handSlot.selected == true) {
-		ctx.strokeStyle = '#e07ac3';
-		ctx.lineWidth = 5;
-		ctx.strokeRect(handSlot.cardX, handSlot.cardY, cardWidth, cardHeight);
+function drawSelected(handSlots) {
+	for (i = 0; i < handSlots.length; i++) {
+		if (handSlots[i].selected == true) {
+			ctx.strokeStyle = '#e07ac3';
+			ctx.lineWidth = 5;
+			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
+		}
+		else if (handSlots[i].selected == false) {
+			ctx.strokeStyle = 'black';
+			ctx.lineWidth = 0.5;
+			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
+		}
 	}
-	else if (handSlot.selected == false) {
-		ctx.strokeStyle = 'black';
-		ctx.lineWidth = 0.5;
-		ctx.strokeRect(handSlot.cardX, handSlot.cardY, cardWidth, cardHeight);
-	}
-}
+};
 
 // function that labels each player's hands with their name
 function labelHands(playerList) {
@@ -246,7 +264,7 @@ function drawBoard(config) {
 	drawPlayerHands(config.playerList, config.handSlots);
 	drawHintBoard();
 	labelHands(config.playerList);
-	labelSelectedCard(config.currentPlayer.hand[0]);
+	drawSelected(config.handSlots);
 };
 
 

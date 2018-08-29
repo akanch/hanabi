@@ -13,7 +13,7 @@ function runGame(config) {
     document.addEventListener('click', update(config));
     setInterval(function() {
       drawBoard(config);
-    }, 1000);
+    }, 100);
 
     /*
     // test discard and release function, works
@@ -67,8 +67,8 @@ function update(config) {
     config.y = event.pageY;
     for (var i = 0; i < config.handSlots.length; i++) {
       config.handSlots[i].ifSelect(config.x, config.y);
-      drawSelected(config.handSlots[i]);
-      console.log(config.handSlots[i]);
+      //drawSelected(config.handSlots[i]);
+      //console.log(config.handSlots[i]);
     };
   };
 };
