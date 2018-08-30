@@ -73,29 +73,38 @@ function update(config) {
         //config.handSlots[i].ifSelect(config.x, config.y);
       //drawSelected(config.handSlots[i]);
       //console.log(config.handSlots[i]);
+
+    // if the current player decides to select one of her own cards
     if (ifSelectOwn(config) == true) {
-      for (i = 0; i < config.handSlots.length; i++) {
-        if (config.handSlots[i].selected == false && config.selectedCard == false) {
+      for (i = 0; i < 5; i++) {
+        if (config.handSlots[i].selected == false && config.handIndex != i) {
           config.handSlots[i].ifSelect(config.x, config.y);
-          if (config.handSlots[i].selected == true) {
+          //console.log(config.handSlots[i].selected);
+          if (config.handSlots[i].selected == true && config.selectedCard == true) {
+            config.handSlots[config.handIndex].selected = false;
+            config.handIndex = i;
+            break;
+          }
+          else if (config.handSlots[i].selected == true) {
             config.selectedCard = true;
+            config.handIndex = i;
             break;
           }
         }
         else if (config.handSlots[i].selected == true && config.selectedCard == true) {
-          console.log('hello world');
+          //console.log('hello world');
           config.handSlots[i].ifSelect(config.x, config.y);
           if (config.handSlots[i].selected == false) {
-            console.log('hello world');
+            //console.log('hello world');
             config.selectedCard = false;
+            config.handIndex = null;
             break;
           }
         } else {
-          //console.log('hello world')
           continue;
         }
-      };
-    }
+      }
+    };
 
 
   };
