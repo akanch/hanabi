@@ -17,5 +17,5 @@ HandSlot.prototype.ifSelect = function(currentX, currentY) {
   && currentY < this.cardY + cardHeight && currentY > this.cardY
   && this.selected == true) {
     this.selected = false;
-  };
+  }
 };

@@ -158,7 +158,6 @@ function drawPlayerHands(playerList, handSlots) {
 		}
 	}
 	else if (handSlots.length != 0) {
-		console.log(handSlots);
 		y = 50;
 		for (i = 0; i < playerList.length; i++) {
 			var x = windowX - cardWidth * 6;
@@ -169,7 +168,6 @@ function drawPlayerHands(playerList, handSlots) {
 			y += cardHeight + 60;
 		}
 	};
-	//console.log(handSlots);
 	drawSelected(handSlots);
 };
 

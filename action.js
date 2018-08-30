@@ -1,14 +1,9 @@
-add lastAction = null
 function Action() {
-  this.card;
-  this.hand()
+  this.selectCard = false;
+  this.selectHint = false;
 }
 
-function Action() {
-    this.card;
-    this.pile;
-}
-
+/*
 var lastAction = null;
 var dicardPile = [];
 canvas.onmousedown = function(e) {
@@ -30,3 +25,4 @@ canvas.onmousedown = function(e) {
     lastAction.card = cardAt(e.x, e.y);
     //redraw
 }
+*/

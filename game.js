@@ -1,4 +1,5 @@
 function runGame(config) {
+  var action = new Action();
     config.currentPlayer.turn = true;
     //ctx.font = "30px Arial";
     //ctx.fillText(config.playerList[4].turn,400,400);
@@ -65,13 +66,58 @@ function update(config) {
   return function(event) {
     config.x = event.pageX;
     config.y = event.pageY;
-    for (var i = 0; i < config.handSlots.length; i++) {
-      config.handSlots[i].ifSelect(config.x, config.y);
+    //if (config.x > windowX - cardWidth * 6 && config.action.selectCard == false
+      //&& config.y < 50 + cardHeight + (config.playerList.indexOf(config.currentPlayer))) {
+      //for (var i = 0; i < config.handSlots.length; i++) {
+        //if (config.handSlots[i])
+        //config.handSlots[i].ifSelect(config.x, config.y);
       //drawSelected(config.handSlots[i]);
       //console.log(config.handSlots[i]);
-    };
+    if (ifSelectOwn(config) == true) {
+      for (i = 0; i < config.handSlots.length; i++) {
+        if (config.handSlots[i].selected == false && config.selectedCard == false) {
+          config.handSlots[i].ifSelect(config.x, config.y);
+          if (config.handSlots[i].selected == true) {
+            config.selectedCard = true;
+            break;
+          }
+        }
+        else if (config.handSlots[i].selected == true && config.selectedCard == true) {
+          console.log('hello world');
+          config.handSlots[i].ifSelect(config.x, config.y);
+          if (config.handSlots[i].selected == false) {
+            console.log('hello world');
+            config.selectedCard = false;
+            break;
+          }
+        } else {
+          //console.log('hello world')
+          continue;
+        }
+      };
+    }
+
+
   };
 };
+
+// function to check if current player selected own cards
+function ifSelectOwn(config) {
+  var currentSlots = [];
+  var playerIndex = config.playerList.indexOf(config.currentPlayer);
+  var currentSlots = config.handSlots.slice(playerIndex * 5, playerIndex * 5 + 5);
+
+  if (config.x < currentSlots[4].cardX + cardWidth && config.x > currentSlots[0].cardX
+    && config.y < currentSlots[0].cardY + cardHeight && config.y > currentSlots[4].cardY) {
+      //console.log(currentSlots);
+      return true;
+    } else {
+    return false;
+  };
+}
+
+
+//function if
 
 function hello() {
   console.log('hello');
