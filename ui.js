@@ -168,21 +168,24 @@ function drawPlayerHands(playerList, handSlots) {
 			y += cardHeight + 60;
 		}
 	};
-	drawSelected(handSlots);
+	drawSelectedCard(handSlots);
 };
 
-function drawSelected(handSlots) {
+function drawSelectedCard(handSlots) {
 	for (i = 0; i < handSlots.length; i++) {
 		if (handSlots[i].selected == true) {
+			ctx.beginPath();
 			ctx.strokeStyle = '#e07ac3';
 			ctx.lineWidth = 5;
 			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
 		}
+		/*
 		else if (handSlots[i].selected == false) {
 			ctx.strokeStyle = 'black';
 			ctx.lineWidth = 0.5;
 			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
 		}
+		*/
 	}
 };
 
@@ -209,39 +212,77 @@ function labelHands(playerList) {
 };
 
 // draw hint board
-function drawHintBoard() {
+function drawHintBoard(hintSlots) {
 	var xFirstRow = 475;
 	var yFirstRow = 60;
 	var xSecondRow = 475;
 	var ySecondRow = 120;
 	var colors = ['blue', 'green', 'red', 'white', 'yellow'];
 	var width = 60;
-	for (i = 0; i < 10; i++) {
-	  if (i < 5) {
-	    ctx.beginPath();
-			ctx.rect(xFirstRow, yFirstRow, width, width);
-			ctx.stroke();
-			ctx.font = "30px Arial";
-			ctx.textAlign = "center";
-			ctx.fillStyle = 'black'
-			ctx.fillText(i + 1, xFirstRow + width / 2, yFirstRow + width / 2 + 10);
-			xFirstRow += width;
-	  }
-	  else {
-	    ctx.beginPath();
-			ctx.fillStyle = colors[i - 5];
-			ctx.fillRect(xSecondRow, ySecondRow, width, width);
-			ctx.strokeRect(xSecondRow, ySecondRow, width, width);
-	    xSecondRow += width;
-	  };
+	if (hintSlots.length == 0) {
+		for (i = 0; i < 10; i++) {
+		  if (i < 5) {
+		    ctx.beginPath();
+				ctx.rect(xFirstRow, yFirstRow, width, width);
+				ctx.stroke();
+				ctx.font = "30px Arial";
+				ctx.textAlign = "center";
+				ctx.fillStyle = 'black'
+				ctx.fillText(i + 1, xFirstRow + width / 2, yFirstRow + width / 2 + 10);
+				hintSlots.push(new HintSlot(i, xFirstRow, yFirstRow));
+				xFirstRow += width;
+		  }
+		  else {
+		    ctx.beginPath();
+				ctx.fillStyle = colors[i - 5];
+				ctx.fillRect(xSecondRow, ySecondRow, width, width);
+				ctx.strokeRect(xSecondRow, ySecondRow, width, width);
+				hintSlots.push(new HintSlot(i, xSecondRow, ySecondRow));
+		    xSecondRow += width;
+		  };
+		};
+	}
+	else if (hintSlots.length != 0) {
+		for (i = 0; i < 10; i++) {
+		  if (i < 5) {
+		    ctx.beginPath();
+				ctx.rect(xFirstRow, yFirstRow, width, width);
+				ctx.stroke();
+				ctx.font = "30px Arial";
+				ctx.textAlign = "center";
+				ctx.fillStyle = 'black'
+				ctx.fillText(i + 1, xFirstRow + width / 2, yFirstRow + width / 2 + 10);
+				xFirstRow += width;
+		  }
+		  else {
+		    ctx.beginPath();
+				ctx.fillStyle = colors[i - 5];
+				ctx.fillRect(xSecondRow, ySecondRow, width, width);
+				ctx.strokeRect(xSecondRow, ySecondRow, width, width);
+		    xSecondRow += width;
+		  };
+		};
 	};
+	drawSelectedHint(hintSlots);
 };
 
-function labelSelectedCard(card) {
 
-	//var x = coordinates.top;
-	//var y = coordinates.left;
-	//card.draw(x, y + 10);
+// function that labels the selected hint
+function drawSelectedHint(hintSlots) {
+	for (i = 0; i < hintSlots.length; i++) {
+		if (hintSlots[i].selected == true) {
+			ctx.beginPath();
+			ctx.strokeStyle = '#e07ac3';
+			ctx.lineWidth = 5;
+			ctx.strokeRect(hintSlots[i].hintX, hintSlots[i].hintY, 60, 60);
+		}
+		else if (hintSlots[i].selected == false) {
+			ctx.beginPath();
+			ctx.strokeStyle = 'black';
+			ctx.lineWidth = 0.5;
+			ctx.strokeRect(hintSlots[i].hintX, hintSlots[i].hintY, 60, 60);
+		}
+	}
 };
 
 
@@ -260,9 +301,8 @@ function drawBoard(config) {
 	drawDiscardPiles(config.discardPiles);
 	drawDeck(config.currentDeck);
 	drawPlayerHands(config.playerList, config.handSlots);
-	drawHintBoard();
+	drawHintBoard(config.hintSlots);
 	labelHands(config.playerList);
-	drawSelected(config.handSlots);
 };
 
 

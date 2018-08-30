@@ -30,9 +30,6 @@ function runGame(config) {
     discarded = config.currentPlayer.release();
     config.discardPiles[4].add(discarded);
 
-    // test drawCard function, works
-    config.currentPlayer.drawCard(config.currentDeck.cards);
-
     // test drawing correct piles
     config.correctGuesses.push(config.playerList[1].release());
     config.correctGuesses.push(config.playerList[1].release());
@@ -55,27 +52,14 @@ function runGame(config) {
 
 };
 
-function getClickPos(event) {
-  var x = event.clientX;
-  var y = event.clientY;
-  console.log(x, y);
-};
-
 // update the configuration of the game
 function update(config) {
   return function(event) {
     config.x = event.pageX;
     config.y = event.pageY;
-    //if (config.x > windowX - cardWidth * 6 && config.action.selectCard == false
-      //&& config.y < 50 + cardHeight + (config.playerList.indexOf(config.currentPlayer))) {
-      //for (var i = 0; i < config.handSlots.length; i++) {
-        //if (config.handSlots[i])
-        //config.handSlots[i].ifSelect(config.x, config.y);
-      //drawSelected(config.handSlots[i]);
-      //console.log(config.handSlots[i]);
 
     // if the current player decides to select one of her own cards
-    if (ifSelectOwn(config) == true) {
+    if (selectOwn(config) == true) {
       for (i = 0; i < 5; i++) {
         if (config.handSlots[i].selected == false && config.handIndex != i) {
           config.handSlots[i].ifSelect(config.x, config.y);
@@ -91,7 +75,6 @@ function update(config) {
           }
         }
         else if (config.handSlots[i].selected == true && config.action.ownCard == true) {
-          //console.log('hello world');
           config.handSlots[i].ifSelect(config.x, config.y);
           if (config.handSlots[i].selected == false) {
             config.action.ownCard = false;
@@ -101,15 +84,44 @@ function update(config) {
         } else {
           continue;
         }
+      };
+    }
+
+    // checks if selected one of the hints
+    console.log(selectHint(config) == true);
+    if (selectOwn(config) == false && selectHint(config) == true) {
+      console.log(config.hintSlots.length);
+      for (i = 0; i < config.hintSlots.length; i++) {
+        if (config.hintSlots[i].selected == false) {
+          config.hintSlots[i].ifSelect(config.x, config.y);
+          if (config.hintSlots[i].selected == true) {
+            break;
+          }
+          else if (config.hintSlots[i].selected == false) {
+            continue;
+          }
+        }
+        else if (config.hintSlots[i].selected == true) {
+          config.hintSlots[i].ifSelect(config.x, config.y);
+          if (config.hintSlots[i].selected == false) {
+            break;
+          }
+          else if (config.hintSlots[i].selected == true) {
+            continue;
+          }
+        }
       }
     };
+
+    //if current player selects a hint on the hint board
+    //if ()
 
 
   };
 };
 
 // function to check if current player selected own cards
-function ifSelectOwn(config) {
+function selectOwn(config) {
   var currentSlots = [];
   var playerIndex = config.playerList.indexOf(config.currentPlayer);
   var currentSlots = config.handSlots.slice(playerIndex * 5, playerIndex * 5 + 5);
@@ -122,14 +134,18 @@ function ifSelectOwn(config) {
     } else {
     return false;
   };
-}
+};
 
-
-//function if
-
-function hello() {
-  console.log('hello');
-}
+// function to check if current player selected one of the hints
+function selectHint(config) {
+  if (config.x > config.hintSlots[0].hintX && config.x < config.hintSlots[9].hintX
+  && config.y > config.hintSlots[0].hintY && config.y < config.hintSlots[9].hintY) {
+    console.log('hello');
+    return true;
+  } else {
+    return false;
+  };
+};
 
 
 /*
