@@ -11,8 +11,8 @@ function Config(currentDeck, numBlueTokens, currentPlayer, playerList, discardPi
 	this.gameOn = gameOn;
 	this.x = 0;
 	this.y = 0;
-	this.selectedCard = false;
 	this.handIndex = null;
+	this.action = new Action;
 };
 
 // Questions for Chav:

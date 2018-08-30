@@ -79,24 +79,22 @@ function update(config) {
       for (i = 0; i < 5; i++) {
         if (config.handSlots[i].selected == false && config.handIndex != i) {
           config.handSlots[i].ifSelect(config.x, config.y);
-          //console.log(config.handSlots[i].selected);
-          if (config.handSlots[i].selected == true && config.selectedCard == true) {
+          if (config.handSlots[i].selected == true && config.action.ownCard == true) {
             config.handSlots[config.handIndex].selected = false;
             config.handIndex = i;
             break;
           }
           else if (config.handSlots[i].selected == true) {
-            config.selectedCard = true;
+            config.action.ownCard = true;
             config.handIndex = i;
             break;
           }
         }
-        else if (config.handSlots[i].selected == true && config.selectedCard == true) {
+        else if (config.handSlots[i].selected == true && config.action.ownCard == true) {
           //console.log('hello world');
           config.handSlots[i].ifSelect(config.x, config.y);
           if (config.handSlots[i].selected == false) {
-            //console.log('hello world');
-            config.selectedCard = false;
+            config.action.ownCard = false;
             config.handIndex = null;
             break;
           }
@@ -117,8 +115,9 @@ function ifSelectOwn(config) {
   var currentSlots = config.handSlots.slice(playerIndex * 5, playerIndex * 5 + 5);
 
   if (config.x < currentSlots[4].cardX + cardWidth && config.x > currentSlots[0].cardX
-    && config.y < currentSlots[0].cardY + cardHeight && config.y > currentSlots[4].cardY) {
-      //console.log(currentSlots);
+    && config.y < currentSlots[0].cardY + cardHeight && config.y > currentSlots[4].cardY
+    && config.action.elseCard == false && config.action.hint == false
+    && config.action.discard == false && config.action.play == false) {
       return true;
     } else {
     return false;
