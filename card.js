@@ -10,9 +10,11 @@ function Card(sideUp, color, number) {
 // draw a card
 Card.prototype.draw = function(x, y) {
   if ((this.colorHint == true && this.numberHint == true) || this.sideUp == true) {
+    ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "black";
+    ctx.closePath();
     ctx.strokeRect(x, y, cardWidth, cardHeight);
     ctx.font = "30px Arial";
     ctx.textAlign = "center";
@@ -22,17 +24,21 @@ Card.prototype.draw = function(x, y) {
 
   // if a color hint is attached to the card
   else if (this.colorHint == true) {
+    ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "black";
+    ctx.closePath();
     ctx.strokeRect(x, y, cardWidth, cardHeight);
   }
 
   // if a number hint is attached to the card
   else if (this.numberHint == true) {
+    ctx.beginPath();
     ctx.fillStyle = "black";
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "white";
+    ctx.closePath();
     ctx.strokeRect(x, y, cardWidth, cardHeight);
     ctx.font = "30px Arial";
     ctx.textAlign = "center";
@@ -40,10 +46,12 @@ Card.prototype.draw = function(x, y) {
     ctx.fillText(this.number, x + (cardWidth/2), y + (cardHeight/2) + 8);
   }
   else {
+    ctx.beginPath();
     ctx.fillStyle = 'black';
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "white";
     ctx.lineWidth = 1;
+    ctx.closePath();
     ctx.strokeRect(x, y, cardWidth, cardHeight);
   }
 };

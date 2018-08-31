@@ -5,7 +5,6 @@ function Token(color) {
 
 // blue token slots
 Token.prototype.draw = function(x, y) {
-  ctx.font = "30px Arial";
   ctx.beginPath();
   ctx.fillStyle = this.color;
   var radiusBlue = 20;

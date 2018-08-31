@@ -10,8 +10,10 @@ function runGame(config) {
       }
     };
 
-    //document.addEventListener('click',  getClickPos);
+    // event listener to register clicks and update config object based on the click
     document.addEventListener('click', update(config));
+
+    // draw updated gameboard configuration
     setInterval(function() {
       drawBoard(config);
     }, 100);
@@ -65,6 +67,7 @@ function update(config) {
           config.handSlots[i].ifSelect(config.x, config.y);
           if (config.handSlots[i].selected == true && config.action.ownCard == true) {
             config.handSlots[config.handIndex].selected = false;
+            config.action.ownCard = true;
             config.handIndex = i;
             break;
           }
@@ -81,33 +84,33 @@ function update(config) {
             config.handIndex = null;
             break;
           }
-        } else {
-          continue;
         }
       };
     }
 
     // checks if selected one of the hints
-    console.log(selectHint(config) == true);
-    if (selectOwn(config) == false && selectHint(config) == true) {
-      console.log(config.hintSlots.length);
+    if (selectHint(config) == true) {
       for (i = 0; i < config.hintSlots.length; i++) {
-        if (config.hintSlots[i].selected == false) {
+        if (config.hintSlots[i].selected == false && config.hintIndex != i) {
           config.hintSlots[i].ifSelect(config.x, config.y);
-          if (config.hintSlots[i].selected == true) {
-            break;
-          }
-          else if (config.hintSlots[i].selected == false) {
-            continue;
-          }
-        }
-        else if (config.hintSlots[i].selected == true) {
-          config.hintSlots[i].ifSelect(config.x, config.y);
-          if (config.hintSlots[i].selected == false) {
+          if (config.hintSlots[i].selected == true && config.action.hint == true) {
+            config.hintSlots[config.hintIndex].selected = false;
+            config.hintIndex = i;
+            config.action.hint = true;
             break;
           }
           else if (config.hintSlots[i].selected == true) {
-            continue;
+            config.action.hint = true;
+            config.hintIndex = i;
+            break;
+          }
+        }
+        else if (config.hintSlots[i].selected == true && config.action.hint == true) {
+          config.hintSlots[i].ifSelect(config.x, config.y);
+          if (config.hintSlots[i].selected == false) {
+            config.action.hint = false;
+            config.hintIndex = null;
+            break;
           }
         }
       }
@@ -138,9 +141,9 @@ function selectOwn(config) {
 
 // function to check if current player selected one of the hints
 function selectHint(config) {
-  if (config.x > config.hintSlots[0].hintX && config.x < config.hintSlots[9].hintX
-  && config.y > config.hintSlots[0].hintY && config.y < config.hintSlots[9].hintY) {
-    console.log('hello');
+  if (config.x > config.hintSlots[0].hintX && config.x < config.hintSlots[9].hintX + 60
+  && config.y > config.hintSlots[0].hintY && config.y < config.hintSlots[9].hintY + 60
+  && config.action.ownCard == false) {
     return true;
   } else {
     return false;

@@ -20,12 +20,14 @@ function drawBlueSlots() {
 	  if (i < 4) {
 	    ctx.beginPath();
 	    ctx.arc(xFirstRow, yFirstRow, radiusBlue, 0,2*Math.PI);
+			ctx.closePath();
 	    ctx.stroke();
 	    xFirstRow += 50;
 	  }
 	  else {
 	    ctx.beginPath();
 	    ctx.arc(xSecondRow, ySecondRow, radiusBlue, 0,2*Math.PI);
+			ctx.closePath();
 	    ctx.stroke();
 	    xSecondRow += 50;
 	  };
@@ -40,6 +42,7 @@ function drawRedSlots() {
   for (i = 0; i < 3; i++) {
     ctx.beginPath();
     ctx.arc(xRed, yRed, radiusRed, 0,2*Math.PI);
+		ctx.closePath();
     ctx.stroke();
     xRed += 70;
 	};
@@ -167,7 +170,7 @@ function drawPlayerHands(playerList, handSlots) {
 			}
 			y += cardHeight + 60;
 		}
-	};
+	}
 	drawSelectedCard(handSlots);
 };
 
@@ -178,15 +181,9 @@ function drawSelectedCard(handSlots) {
 			ctx.strokeStyle = '#e07ac3';
 			ctx.lineWidth = 5;
 			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
+			ctx.closePath();
 		}
-		/*
-		else if (handSlots[i].selected == false) {
-			ctx.strokeStyle = 'black';
-			ctx.lineWidth = 0.5;
-			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
-		}
-		*/
-	}
+	};
 };
 
 // function that labels each player's hands with their name
@@ -229,6 +226,7 @@ function drawHintBoard(hintSlots) {
 				ctx.textAlign = "center";
 				ctx.fillStyle = 'black'
 				ctx.fillText(i + 1, xFirstRow + width / 2, yFirstRow + width / 2 + 10);
+				ctx.closePath();
 				hintSlots.push(new HintSlot(i, xFirstRow, yFirstRow));
 				xFirstRow += width;
 		  }
@@ -236,6 +234,7 @@ function drawHintBoard(hintSlots) {
 		    ctx.beginPath();
 				ctx.fillStyle = colors[i - 5];
 				ctx.fillRect(xSecondRow, ySecondRow, width, width);
+				ctx.closePath();
 				ctx.strokeRect(xSecondRow, ySecondRow, width, width);
 				hintSlots.push(new HintSlot(i, xSecondRow, ySecondRow));
 		    xSecondRow += width;
@@ -247,6 +246,7 @@ function drawHintBoard(hintSlots) {
 		  if (i < 5) {
 		    ctx.beginPath();
 				ctx.rect(xFirstRow, yFirstRow, width, width);
+				ctx.closePath();
 				ctx.stroke();
 				ctx.font = "30px Arial";
 				ctx.textAlign = "center";
@@ -258,6 +258,7 @@ function drawHintBoard(hintSlots) {
 		    ctx.beginPath();
 				ctx.fillStyle = colors[i - 5];
 				ctx.fillRect(xSecondRow, ySecondRow, width, width);
+				ctx.closePath();
 				ctx.strokeRect(xSecondRow, ySecondRow, width, width);
 		    xSecondRow += width;
 		  };
@@ -265,6 +266,7 @@ function drawHintBoard(hintSlots) {
 	};
 	drawSelectedHint(hintSlots);
 };
+
 
 
 // function that labels the selected hint
@@ -275,14 +277,9 @@ function drawSelectedHint(hintSlots) {
 			ctx.strokeStyle = '#e07ac3';
 			ctx.lineWidth = 5;
 			ctx.strokeRect(hintSlots[i].hintX, hintSlots[i].hintY, 60, 60);
+			ctx.closePath();
 		}
-		else if (hintSlots[i].selected == false) {
-			ctx.beginPath();
-			ctx.strokeStyle = 'black';
-			ctx.lineWidth = 0.5;
-			ctx.strokeRect(hintSlots[i].hintX, hintSlots[i].hintY, 60, 60);
-		}
-	}
+	};
 };
 
 

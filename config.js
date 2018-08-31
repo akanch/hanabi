@@ -13,5 +13,6 @@ function Config(currentDeck, numBlueTokens, currentPlayer, playerList, discardPi
 	this.x = 0;
 	this.y = 0;
 	this.handIndex = null;
+	this.hintIndex = null;
 	this.action = new Action;
 };
