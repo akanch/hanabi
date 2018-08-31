@@ -85,8 +85,8 @@ function update(config) {
             break;
           }
         }
-      };
-    }
+      }
+    };
 
     // checks if selected one of the hints
     if (selectHint(config) == true) {
@@ -113,7 +113,7 @@ function update(config) {
             break;
           }
         }
-      }
+      };
     };
 
     //if current player selects a hint on the hint board

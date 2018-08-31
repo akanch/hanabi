@@ -170,7 +170,7 @@ function drawPlayerHands(playerList, handSlots) {
 			}
 			y += cardHeight + 60;
 		}
-	}
+	};
 	drawSelectedCard(handSlots);
 };
 
@@ -181,8 +181,15 @@ function drawSelectedCard(handSlots) {
 			ctx.strokeStyle = '#e07ac3';
 			ctx.lineWidth = 5;
 			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
-			ctx.closePath();
 		}
+		// fixes the issue of outlining all objects on draw board but why?
+		/*
+		else if (handSlots[i].selected == false) {
+			ctx.strokeStyle = 'black';
+			ctx.lineWidth = 0.5;
+			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
+		}
+		*/
 	};
 };
 
@@ -279,6 +286,14 @@ function drawSelectedHint(hintSlots) {
 			ctx.strokeRect(hintSlots[i].hintX, hintSlots[i].hintY, 60, 60);
 			ctx.closePath();
 		}
+		// fixes the issue of outlining all objects on draw board except last hint, and outline is messed up
+		/*
+		else if (hintSlots[i].selected == false) {
+			ctx.strokeStyle = 'black';
+			ctx.lineWidth = 0.5;
+			ctx.strokeRect(hintSlots[i].hintX, hintSlots[i].hintY, 60, 60);
+		}
+		*/
 	};
 };
 
@@ -297,9 +312,9 @@ function drawBoard(config) {
 	drawDiscardSlots();
 	drawDiscardPiles(config.discardPiles);
 	drawDeck(config.currentDeck);
+	labelHands(config.playerList);
 	drawPlayerHands(config.playerList, config.handSlots);
 	drawHintBoard(config.hintSlots);
-	labelHands(config.playerList);
 };
 
 
