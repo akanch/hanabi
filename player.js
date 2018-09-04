@@ -8,10 +8,8 @@ function Player(name) {
 
 // release card function for discarding and playing cards
 // RELEASE FUNCTION SHOULD WORK ON SELECTED CARD, NOT .POP
-Player.prototype.release = function() {
-  released = this.hand.pop();
-  // move discard to discard slots
-  return released;
+Player.prototype.release = function(index) {
+  return this.hand.splice(index, 1);
 };
 
 // draw a card from the deck

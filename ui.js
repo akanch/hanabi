@@ -288,6 +288,18 @@ function drawSelectedHint(hintSlots) {
 	ctx.strokeStyle = 'black';
 };
 
+// draws the regions to play or discard a card
+function drawRegions(ownCard) {
+	if (ownCard == true) {
+		var x = 5;
+		var playY = 210;
+		var discardY = 210 + cardHeight + 20;
+		ctx.fillStyle = 'rgba(0,246,0,0.2';
+		ctx.fillRect(x, playY, 700, cardHeight + 20);
+		ctx.fillStyle = 'rgba(255,20,0,0.2';
+		ctx.fillRect(x, discardY, 700, cardHeight * 5 + 40);
+	}
+};
 
 // function for drawing the board with current configuration
 function drawBoard(config) {
@@ -308,6 +320,7 @@ function drawBoard(config) {
 	labelHands(config.playerList);
 	drawPlayerHands(config.playerList, config.handSlots);
 	drawHintBoard(config.hintSlots);
+	drawRegions(config.action.ownCard);
 };
 
 

@@ -88,6 +88,11 @@ function update(config) {
       }
     };
 
+    // if current player decides to discard her own card
+    if (selectDiscard(config) == true) {
+
+    }
+
     // checks if selected one of the hints
     if (selectHint(config) == true) {
       for (i = 0; i < config.hintSlots.length; i++) {
@@ -116,6 +121,7 @@ function update(config) {
       };
     };
 
+
     //if current player selects a hint on the hint board
     //if ()
 
@@ -140,7 +146,6 @@ function selectOwn(config) {
 };
 
 // function to check if current player selected one of the hints
-
 function selectHint(config) {
   if (config.x > config.hintSlots[0].hintX && config.x < config.hintSlots[9].hintX + 60
   && config.y > config.hintSlots[0].hintY && config.y < config.hintSlots[9].hintY + 60
@@ -151,7 +156,11 @@ function selectHint(config) {
   };
 };
 
-
+// function to determine if current player is deciding to discard her own card
+function selectDiscard(config) {
+  if (config.action.ownCard == true)
+    return true;
+};
 /*
 function Game(playerList) {
 // creating the board for the game
