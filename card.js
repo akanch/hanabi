@@ -14,8 +14,8 @@ Card.prototype.draw = function(x, y) {
     ctx.fillStyle = this.color;
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "black";
-    ctx.closePath();
     ctx.strokeRect(x, y, cardWidth, cardHeight);
+    ctx.closePath();
     ctx.font = "30px Arial";
     ctx.textAlign = "center";
     ctx.fillStyle = "black";
@@ -28,8 +28,8 @@ Card.prototype.draw = function(x, y) {
     ctx.fillStyle = this.color;
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "black";
-    ctx.closePath();
     ctx.strokeRect(x, y, cardWidth, cardHeight);
+    ctx.closePath();
   }
 
   // if a number hint is attached to the card
@@ -38,8 +38,8 @@ Card.prototype.draw = function(x, y) {
     ctx.fillStyle = "black";
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "white";
-    ctx.closePath();
     ctx.strokeRect(x, y, cardWidth, cardHeight);
+    ctx.closePath();
     ctx.font = "30px Arial";
     ctx.textAlign = "center";
     ctx.fillStyle = "white";
@@ -51,8 +51,8 @@ Card.prototype.draw = function(x, y) {
     ctx.fillRect(x, y, cardWidth, cardHeight);
     ctx.strokeStyle = "white";
     ctx.lineWidth = 1;
-    ctx.closePath();
     ctx.strokeRect(x, y, cardWidth, cardHeight);
+    ctx.closePath();
   }
 };
   /*

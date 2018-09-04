@@ -140,6 +140,7 @@ function selectOwn(config) {
 };
 
 // function to check if current player selected one of the hints
+
 function selectHint(config) {
   if (config.x > config.hintSlots[0].hintX && config.x < config.hintSlots[9].hintX + 60
   && config.y > config.hintSlots[0].hintY && config.y < config.hintSlots[9].hintY + 60

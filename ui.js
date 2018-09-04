@@ -20,15 +20,15 @@ function drawBlueSlots() {
 	  if (i < 4) {
 	    ctx.beginPath();
 	    ctx.arc(xFirstRow, yFirstRow, radiusBlue, 0,2*Math.PI);
-			ctx.closePath();
 	    ctx.stroke();
+			ctx.closePath();
 	    xFirstRow += 50;
 	  }
 	  else {
 	    ctx.beginPath();
 	    ctx.arc(xSecondRow, ySecondRow, radiusBlue, 0,2*Math.PI);
-			ctx.closePath();
 	    ctx.stroke();
+			ctx.closePath();
 	    xSecondRow += 50;
 	  };
 	};
@@ -42,8 +42,8 @@ function drawRedSlots() {
   for (i = 0; i < 3; i++) {
     ctx.beginPath();
     ctx.arc(xRed, yRed, radiusRed, 0,2*Math.PI);
-		ctx.closePath();
     ctx.stroke();
+		ctx.closePath();
     xRed += 70;
 	};
 };
@@ -86,8 +86,10 @@ function drawCorrectSlots() {
 	var deckX = 15;
 	var yCorrect = 220;
 	for (i = 0; i < 5; i++) {
+		ctx.beginPath();
 	  ctx.rect(deckX, yCorrect, cardWidth, cardHeight);
 	  ctx.stroke();
+		ctx.closePath();
 	  deckX += cardWidth + 5;
 	};
 };
@@ -124,8 +126,10 @@ function drawDiscardSlots(discarded) {
 	var deckX = 15;
 	var yDiscard = 240 + cardHeight;
 	for (i = 0; i < 5; i++) {
+		ctx.beginPath();
 	  ctx.rect(deckX, yDiscard, cardWidth, cardHeight);
 	  ctx.stroke();
+		ctx.closePath();
 	  yDiscard += cardHeight + 5;
 	};
 };
@@ -135,8 +139,6 @@ function drawDiscardPiles(discardPiles) {
 	var yDiscard = 240 + cardHeight;
 	for (i = 0; i < discardPiles.length; i++) {
 		var deckX = 15;
-		//ctx.font = "30px Arial";
-		//ctx.fillText(discardPiles[i],deckX, yDiscard);
 		for (j = 0; j < discardPiles[i].pile.length; j++) {
 			discardPiles[i].pile[j].sideUp = true;
 			discardPiles[i].pile[j].draw(deckX, yDiscard);
@@ -181,16 +183,11 @@ function drawSelectedCard(handSlots) {
 			ctx.strokeStyle = '#e07ac3';
 			ctx.lineWidth = 5;
 			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
+			ctx.closePath();
 		}
-		// fixes the issue of outlining all objects on draw board but why?
-		/*
-		else if (handSlots[i].selected == false) {
-			ctx.strokeStyle = 'black';
-			ctx.lineWidth = 0.5;
-			ctx.strokeRect(handSlots[i].cardX, handSlots[i].cardY, cardWidth, cardHeight);
-		}
-		*/
 	};
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = 'black';
 };
 
 // function that labels each player's hands with their name
@@ -215,6 +212,7 @@ function labelHands(playerList) {
 	};
 };
 
+
 // draw hint board
 function drawHintBoard(hintSlots) {
 	var xFirstRow = 475;
@@ -229,11 +227,10 @@ function drawHintBoard(hintSlots) {
 		    ctx.beginPath();
 				ctx.rect(xFirstRow, yFirstRow, width, width);
 				ctx.stroke();
+				ctx.closePath();
 				ctx.font = "30px Arial";
 				ctx.textAlign = "center";
-				ctx.fillStyle = 'black'
-				ctx.fillText(i + 1, xFirstRow + width / 2, yFirstRow + width / 2 + 10);
-				ctx.closePath();
+				ctx.fillStyle = 'black';
 				hintSlots.push(new HintSlot(i, xFirstRow, yFirstRow));
 				xFirstRow += width;
 		  }
@@ -241,8 +238,8 @@ function drawHintBoard(hintSlots) {
 		    ctx.beginPath();
 				ctx.fillStyle = colors[i - 5];
 				ctx.fillRect(xSecondRow, ySecondRow, width, width);
-				ctx.closePath();
 				ctx.strokeRect(xSecondRow, ySecondRow, width, width);
+				ctx.closePath();
 				hintSlots.push(new HintSlot(i, xSecondRow, ySecondRow));
 		    xSecondRow += width;
 		  };
@@ -253,8 +250,8 @@ function drawHintBoard(hintSlots) {
 		  if (i < 5) {
 		    ctx.beginPath();
 				ctx.rect(xFirstRow, yFirstRow, width, width);
-				ctx.closePath();
 				ctx.stroke();
+				ctx.closePath();
 				ctx.font = "30px Arial";
 				ctx.textAlign = "center";
 				ctx.fillStyle = 'black'
@@ -265,8 +262,8 @@ function drawHintBoard(hintSlots) {
 		    ctx.beginPath();
 				ctx.fillStyle = colors[i - 5];
 				ctx.fillRect(xSecondRow, ySecondRow, width, width);
-				ctx.closePath();
 				ctx.strokeRect(xSecondRow, ySecondRow, width, width);
+				ctx.closePath();
 		    xSecondRow += width;
 		  };
 		};
@@ -286,23 +283,19 @@ function drawSelectedHint(hintSlots) {
 			ctx.strokeRect(hintSlots[i].hintX, hintSlots[i].hintY, 60, 60);
 			ctx.closePath();
 		}
-		// fixes the issue of outlining all objects on draw board except last hint, and outline is messed up
-		/*
-		else if (hintSlots[i].selected == false) {
-			ctx.strokeStyle = 'black';
-			ctx.lineWidth = 0.5;
-			ctx.strokeRect(hintSlots[i].hintX, hintSlots[i].hintY, 60, 60);
-		}
-		*/
 	};
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = 'black';
 };
 
 
 // function for drawing the board with current configuration
 function drawBoard(config) {
+	ctx.beginPath();
 	ctx.rect(0, 0, windowX, windowY);
 	ctx.fillStyle = '#6e777a';
 	ctx.fill();
+	ctx.closePath();
 	drawBlueSlots();
 	drawRedSlots();
 	drawBlueTokens(config.numBlueTokens);
