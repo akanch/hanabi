@@ -95,6 +95,7 @@ function drawCorrectSlots() {
 };
 
 function drawCorrectPiles(correctGuesses) {
+	console.log(correctGuesses);
 	var yCorrect = 220;
 	var blueX = 15;
 	var greenX = blueX + cardWidth + 5;
@@ -167,7 +168,7 @@ function drawPlayerHands(playerList, handSlots) {
 		for (i = 0; i < playerList.length; i++) {
 			var x = windowX - cardWidth * 6;
 			for (j = 0; j < playerList[i].hand.length; j++) {
-				//console.log(playerList[0].hand.length);	
+				//console.log(playerList[0].hand.length);
 				playerList[i].hand[j].draw(x, y); //DRAW CARD WHEN NOTHING TO DRAW??
 				x += cardWidth + 1;
 			}

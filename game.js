@@ -77,7 +77,7 @@ function update(config) {
 
       // if current player decides to discard her own card
       if (selectDiscard(config) == true) {
-        released = config.currentPlayer.release(config.handIndex - startIdx);
+        var released = config.currentPlayer.release(config.handIndex - startIdx);
         for (i = 0; i < config.discardPiles.length; i++) {
           if (released.color == config.discardPiles[i].color) {
             config.discardPiles[i].add(released);
@@ -88,6 +88,41 @@ function update(config) {
               config.numBlueTokens += 1;
             }
             break;
+          }
+        }
+        updateTurn(config);
+      }
+
+      // checks if current player decides to play her own card
+      if (selectPlay(config) == true) {
+        released = config.currentPlayer.release(config.handIndex - startIdx);
+        for (var i = 0; i < config.playedPiles.length; i++) {
+          if (released.color == config.playedPiles[i].color) {
+            if (released.number == 5 && config.playedPiles[i].pile.length == 4 && config.numBlueTokens < 8) {
+              config.correctGuesses.push(released);
+              config.playedPiles[i].add(released);
+              if (config.currentDeck.cards.length != 0) {
+                config.currentPlayer.drawCard(config.currentDeck.cards);
+              }
+              config.numBlueTokes++;
+            }
+            else if (released.number == config.playedPiles[i].pile.length + 1) {
+              config.correctGuesses.push(released);
+              config.playedPiles.add(released);
+              if (config.currentDeck.cards.length != 0) {
+                config.currentPlayer.drawCard(config.currentDeck.cards);
+              }
+            } else {
+              for (var i = 0; i < config.discardPiles.length; i++) {
+                if (released.color == config.discardPiles[i].color) {
+                  config.discardPiles[i].add(released);
+                  config.numWrongGuesses++;
+                  if (config.currentDeck.cards.length != 0) {
+                    config.currentPlayer.drawCard(config.currentDeck.cards);
+                  }
+                }
+              }
+            }
           }
         }
         updateTurn(config);
@@ -119,7 +154,7 @@ function update(config) {
             }
           }
         };
-      };
+      }
 
       // see if all players have 4 cards, if so, end game
       var count = 0;
@@ -177,6 +212,18 @@ function selectDiscard(config) {
   var discardY = 210 + cardHeight + 20;
   if (config.action.ownCard == true && config.x > x && config.x < x + 700
   && config.y > discardY && config.y < discardY + cardHeight * 5 + 40) {
+    return true;
+  } else {
+    return false;
+  };
+};
+
+// function to check if current player is playing her own card
+function selectPlay(config) {
+  var x = 5;
+  var playY = 210;
+  if (config.action.ownCard == true && config.x > x && config.x < x + 700
+  && config.y > playY && config.y < playY + cardHeight + 20) {
     return true;
   } else {
     return false;
