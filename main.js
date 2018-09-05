@@ -3,11 +3,11 @@ function Main() {
   deck.shuffle();
   var playerList = [];
   // discard piles
-  var blueDiscard = new Discard();
-  var greenDiscard = new Discard();
-  var redDiscard = new Discard();
-  var whiteDiscard = new Discard();
-  var yellowDiscard = new Discard();
+  var blueDiscard = new Discard('blue');
+  var greenDiscard = new Discard('green');
+  var redDiscard = new Discard('red');
+  var whiteDiscard = new Discard('white');
+  var yellowDiscard = new Discard('yellow');
   var discardPiles = [blueDiscard, greenDiscard, redDiscard, whiteDiscard, yellowDiscard];
   var playerOne = new Player("Sophmonster");
   var playerTwo = new Player("mr. money bags");

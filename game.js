@@ -1,36 +1,21 @@
 function runGame(config) {
-  var action = new Action();
-    config.currentPlayer.turn = true;
-    //ctx.font = "30px Arial";
-    //ctx.fillText(config.playerList[4].turn,400,400);
-    var y = 400;
-    for (var i = 0; i < config.playerList.length; i++) {
-      if (config.playerList[i].turn == false) {
-        config.playerList[i].revealHand();
-      }
-    };
+  config.currentPlayer.turn = true;
+  var y = 400;
+  for (var i = 0; i < config.playerList.length; i++) {
+    if (config.playerList[i].turn == false) {
+      config.playerList[i].revealHand();
+    }
+  };
 
-    // event listener to register clicks and update config object based on the click
-    document.addEventListener('click', update(config));
+  // event listener to register clicks and update config object based on the click
+  document.addEventListener('click', update(config));
 
-    // draw updated gameboard configuration
-    setInterval(function() {
-      drawBoard(config);
-    }, 100);
+  // draw updated gameboard configuration
+  setInterval(function() {
+    drawBoard(config);
+  }, 100);
 
     /*
-    // test discard and release function, works
-
-    var discarded = config.currentPlayer.release();
-    config.discardPiles[2].add(discarded);
-    discarded = config.currentPlayer.release();
-    config.discardPiles[0].add(discarded);
-    discarded = config.currentPlayer.release();
-    config.discardPiles[1].add(discarded);
-    discarded = config.currentPlayer.release();
-    config.discardPiles[3].add(discarded);
-    discarded = config.currentPlayer.release();
-    config.discardPiles[4].add(discarded);
 
     // test drawing correct piles
     config.correctGuesses.push(config.playerList[1].release());
@@ -57,6 +42,7 @@ function runGame(config) {
 // update the configuration of the game
 function update(config) {
   return function(event) {
+
     config.x = event.pageX;
     config.y = event.pageY;
 
@@ -90,7 +76,18 @@ function update(config) {
 
     // if current player decides to discard her own card
     if (selectDiscard(config) == true) {
-
+      released = config.currentPlayer.release(config.handIndex);
+      for (i = 0; i < config.discardPiles.length; i++) {
+        if (released.color == config.discardPiles[i].color) {
+          config.discardPiles[i].add(released);
+          config.currentPlayer.drawCard(config.currentDeck.cards);
+          if (config.numBlueTokens < 8) {
+            config.numBlueTokens += 1;
+          }
+          break;
+        }
+      }
+      updateTurn(config);
     }
 
     // checks if selected one of the hints
@@ -158,8 +155,37 @@ function selectHint(config) {
 
 // function to determine if current player is deciding to discard her own card
 function selectDiscard(config) {
-  if (config.action.ownCard == true)
+  var x = 5;
+  var discardY = 210 + cardHeight + 20;
+  if (config.action.ownCard == true && config.x > x && config.x < x + 700
+  && config.y > discardY && config.y < discardY + cardHeight * 5 + 40) {
     return true;
+  } else {
+    return false;
+  };
+};
+
+// function that resets actions and updates the turn of current player at end of turn
+function updateTurn(config) {
+  config.handSlots[config.handIndex].selected = false;
+  config.handIndex = null;
+  config.action.ownCard = false;
+  config.action.hint = false;
+  config.action.discard = false;
+  config.action.play = false;
+  var idx = config.playerList.indexOf(config.currentPlayer);
+  config.currentPlayer.turn = false;
+
+  // updates currentPlayer
+  config.currentPlayer = config.playerList[idx + 1];
+  config.currentPlayer.turn = true;
+  config.currentPlayer.hideHand();
+  // reveals the hand of current player
+  for (var i = 0; i < config.playerList.length; i++) {
+    if (config.playerList[i].turn == false) {
+      config.playerList[i].revealHand();
+    }
+  };
 };
 /*
 function Game(playerList) {

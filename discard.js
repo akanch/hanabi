@@ -1,6 +1,7 @@
 // create discard pile constructor
-function Discard() {
+function Discard(color) {
   this.pile = [];
+  this.color = color;
 };
 
 // function to add a card to the discard pile

@@ -9,17 +9,24 @@ function Player(name) {
 // release card function for discarding and playing cards
 // RELEASE FUNCTION SHOULD WORK ON SELECTED CARD, NOT .POP
 Player.prototype.release = function(index) {
-  return this.hand.splice(index, 1);
+  x = this.hand.splice(index, 1);
+  return x[0];
 };
 
 // draw a card from the deck
 Player.prototype.drawCard = function(deck) {
-  this.hand.push(deck.pop());
+  this.hand.unshift(deck.pop());
 };
 
 // receive a hint function
 Player.prototype.getHint = function(hint) {
   this.hint.push(hint);
+};
+
+Player.prototype.hideHand = function() {
+  for (i = 0; i < this.hand.length; i++) {
+    this.hand[i].sideUp = false;
+  };
 };
 
 Player.prototype.revealHand = function() {
