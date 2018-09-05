@@ -108,7 +108,7 @@ function update(config) {
             }
             else if (released.number == config.playedPiles[i].pile.length + 1) {
               config.correctGuesses.push(released);
-              config.playedPiles.add(released);
+              config.playedPiles[i].add(released);
               if (config.currentDeck.cards.length != 0) {
                 config.currentPlayer.drawCard(config.currentDeck.cards);
               }
