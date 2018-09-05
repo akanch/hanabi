@@ -42,87 +42,98 @@ function runGame(config) {
 // update the configuration of the game
 function update(config) {
   return function(event) {
-    config.x = event.pageX;
-    config.y = event.pageY;
+    if (config.gameOn == true) {
+      config.x = event.pageX;
+      config.y = event.pageY;
 
-    // if the current player decides to select one of her own cards
-    var startIdx = findIdx(config);
-    if (selectOwn(config) == true) {
-      for (i = startIdx; i < startIdx + 5; i++) {
-        if (config.handSlots[i].selected == false && config.handIndex != i) {
-          config.handSlots[i].ifSelect(config.x, config.y);
-          if (config.handSlots[i].selected == true && config.action.ownCard == true) {
-            config.handSlots[config.handIndex].selected = false;
-            config.action.ownCard = true;
-            config.handIndex = i;
-            break;
+      // if the current player decides to select one of her own cards
+      var startIdx = findIdx(config);
+      if (selectOwn(config) == true) {
+        for (i = startIdx; i < startIdx + 5; i++) {
+          if (config.handSlots[i].selected == false && config.handIndex != i) {
+            config.handSlots[i].ifSelect(config.x, config.y);
+            if (config.handSlots[i].selected == true && config.action.ownCard == true) {
+              config.handSlots[config.handIndex].selected = false;
+              config.action.ownCard = true;
+              config.handIndex = i;
+              break;
+            }
+            else if (config.handSlots[i].selected == true) {
+              config.action.ownCard = true;
+              config.handIndex = i;
+              break;
+            }
           }
-          else if (config.handSlots[i].selected == true) {
-            config.action.ownCard = true;
-            config.handIndex = i;
-            break;
-          }
-        }
-        else if (config.handSlots[i].selected == true && config.action.ownCard == true) {
-          config.handSlots[i].ifSelect(config.x, config.y);
-          if (config.handSlots[i].selected == false) {
-            config.action.ownCard = false;
-            config.handIndex = null;
-            break;
-          }
-        }
-      }
-    };
-
-    // if current player decides to discard her own card
-    if (selectDiscard(config) == true) {
-      released = config.currentPlayer.release(config.handIndex - startIdx);
-      for (i = 0; i < config.discardPiles.length; i++) {
-        if (released.color == config.discardPiles[i].color) {
-          config.discardPiles[i].add(released);
-          config.currentPlayer.drawCard(config.currentDeck.cards);
-          if (config.numBlueTokens < 8) {
-            config.numBlueTokens += 1;
-          }
-          break;
-        }
-      }
-      updateTurn(config);
-    }
-
-    // checks if selected one of the hints
-    if (selectHint(config) == true) {
-      for (i = 0; i < config.hintSlots.length; i++) {
-        if (config.hintSlots[i].selected == false && config.hintIndex != i) {
-          config.hintSlots[i].ifSelect(config.x, config.y);
-          if (config.hintSlots[i].selected == true && config.action.hint == true) {
-            config.hintSlots[config.hintIndex].selected = false;
-            config.hintIndex = i;
-            config.action.hint = true;
-            break;
-          }
-          else if (config.hintSlots[i].selected == true) {
-            config.action.hint = true;
-            config.hintIndex = i;
-            break;
-          }
-        }
-        else if (config.hintSlots[i].selected == true && config.action.hint == true) {
-          config.hintSlots[i].ifSelect(config.x, config.y);
-          if (config.hintSlots[i].selected == false) {
-            config.action.hint = false;
-            config.hintIndex = null;
-            break;
+          else if (config.handSlots[i].selected == true && config.action.ownCard == true) {
+            config.handSlots[i].ifSelect(config.x, config.y);
+            if (config.handSlots[i].selected == false) {
+              config.action.ownCard = false;
+              config.handIndex = null;
+              break;
+            }
           }
         }
       };
+
+      // if current player decides to discard her own card
+      if (selectDiscard(config) == true) {
+        released = config.currentPlayer.release(config.handIndex - startIdx);
+        for (i = 0; i < config.discardPiles.length; i++) {
+          if (released.color == config.discardPiles[i].color) {
+            config.discardPiles[i].add(released);
+            if (config.currentDeck.cards.length != 0) {
+              config.currentPlayer.drawCard(config.currentDeck.cards);
+            }
+            if (config.numBlueTokens < 8) {
+              config.numBlueTokens += 1;
+            }
+            break;
+          }
+        }
+        updateTurn(config);
+      }
+
+      // checks if selected one of the hints
+      if (selectHint(config) == true) {
+        for (i = 0; i < config.hintSlots.length; i++) {
+          if (config.hintSlots[i].selected == false && config.hintIndex != i) {
+            config.hintSlots[i].ifSelect(config.x, config.y);
+            if (config.hintSlots[i].selected == true && config.action.hint == true) {
+              config.hintSlots[config.hintIndex].selected = false;
+              config.hintIndex = i;
+              config.action.hint = true;
+              break;
+            }
+            else if (config.hintSlots[i].selected == true) {
+              config.action.hint = true;
+              config.hintIndex = i;
+              break;
+            }
+          }
+          else if (config.hintSlots[i].selected == true && config.action.hint == true) {
+            config.hintSlots[i].ifSelect(config.x, config.y);
+            if (config.hintSlots[i].selected == false) {
+              config.action.hint = false;
+              config.hintIndex = null;
+              break;
+            }
+          }
+        };
+      };
+
+      // see if all players have 4 cards, if so, end game
+      var count = 0;
+      for (i = 0; i < config.playerList.length; i++) {
+        if (config.playerList[i].hand.length == 4) {
+          count++;
+        }
+      }
+      if (count == config.playerList.length) {
+        config.gameOn = false;
+      }
+
+
     };
-
-
-    //if current player selects a hint on the hint board
-    //if ()
-
-
   };
 };
 
@@ -198,7 +209,7 @@ function updateTurn(config) {
       config.playerList[i].revealHand();
     }
   };
-};
+} ;
 /*
 function Game(playerList) {
 // creating the board for the game

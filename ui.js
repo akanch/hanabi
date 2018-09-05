@@ -167,15 +167,17 @@ function drawPlayerHands(playerList, handSlots) {
 		for (i = 0; i < playerList.length; i++) {
 			var x = windowX - cardWidth * 6;
 			for (j = 0; j < playerList[i].hand.length; j++) {
-				playerList[i].hand[j].draw(x, y);
+				//console.log(playerList[0].hand.length);	
+				playerList[i].hand[j].draw(x, y); //DRAW CARD WHEN NOTHING TO DRAW??
 				x += cardWidth + 1;
 			}
 			y += cardHeight + 60;
 		}
-	};
+	}
 	drawSelectedCard(handSlots);
 };
 
+// function that outlines the selected card
 function drawSelectedCard(handSlots) {
 	for (i = 0; i < handSlots.length; i++) {
 		if (handSlots[i].selected == true) {
