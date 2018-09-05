@@ -81,7 +81,7 @@ function update(config) {
               if (config.currentDeck.cards.length != 0) {
                 config.currentPlayer.drawCard(config.currentDeck.cards);
               }
-              config.numBlueTokes++;
+              config.numBlueTokens++;
             }
             else if (released.number == config.playedPiles[i].pile.length + 1) {
               config.correctGuesses.push(released);
