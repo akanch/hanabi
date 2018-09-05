@@ -14,29 +14,6 @@ function runGame(config) {
   setInterval(function() {
     drawBoard(config);
   }, 100);
-
-    /*
-
-    // test drawing correct piles
-    config.correctGuesses.push(config.playerList[1].release());
-    config.correctGuesses.push(config.playerList[1].release());
-    config.correctGuesses.push(config.playerList[2].release());
-    config.correctGuesses.push(config.playerList[2].release());
-    config.correctGuesses.push(config.playerList[3].release());
-    config.correctGuesses.push(config.playerList[3].release());
-    config.correctGuesses.push(config.playerList[4].release());
-    config.correctGuesses.push(config.playerList[4].release());
-    config.correctGuesses.push(config.playerList[4].release());
-    */
-
-    //drawBoard(config);
-    //config = update(config);
-
-    //if (config.wrongGuesses == 3) {
-      // return lose and break
-    //};
-    //window.setInterval(drawBoard(config), 20);
-
 };
 
 // update the configuration of the game
@@ -114,12 +91,15 @@ function update(config) {
               }
             } else {
               for (var i = 0; i < config.discardPiles.length; i++) {
-                if (released.color == config.discardPiles[i].color) {
+                if (released.color == config.discardPiles[i].color && config.numWrongGuesses < 3) {
                   config.discardPiles[i].add(released);
                   config.numWrongGuesses++;
                   if (config.currentDeck.cards.length != 0) {
                     config.currentPlayer.drawCard(config.currentDeck.cards);
                   }
+                }
+                else if (config.numWrongGuesses == 3) {
+                  config.gameOn = false;
                 }
               }
             }
@@ -166,8 +146,6 @@ function update(config) {
       if (count == config.playerList.length) {
         config.gameOn = false;
       }
-
-
     };
   };
 };
@@ -256,52 +234,4 @@ function updateTurn(config) {
       config.playerList[i].revealHand();
     }
   };
-} ;
-/*
-function Game(playerList) {
-// creating the board for the game
-ctx.rect(0, 0, windowX, windowY);
-ctx.fillStyle = '#6e777a';
-ctx.fill();
-
-// slot for the deck
-ctx.rect(deckX, deckY, cardWidth, cardHeight);
-ctx.stroke();
-
-
-  // shuffled deck created (there is on still in main)
-  var newDeck = new Deck([1, 1, 1, 2, 2, 3, 3, 4, 4, 5]);
-  newDeck.shuffle();
-  };
-
-  // discard piles
-  blueDiscard = new Discard();
-  greenDiscard = new Discard();
-  redDiscard = new Discard();
-  yellowDiscard = new Discard();
-
-  // test discard piles
-  blueDiscard.add(newDeck.cards.pop());
-  blueDiscard.add(newDeck.cards.pop());
-
-  // draw discarded piles
-  var discardPiles = [blueDiscard, greenDiscard, redDiscard, whiteDiscard, yellowDiscard];
-  yDiscard = 275;
-  deckX = 15;
-  for (i = 0; i < 4; i++) {
-    for (j = 0; j < discardPiles[i].pile.length; j++) {
-      var currentPile = discardPiles[i];
-      currentPile.pile[j].draw(deckX, yDiscard);
-      deckX += cardWidth + 5;
-    }
-    yDiscard += cardHeight + 5;
-  };
-
-
-
-  // create player object
-
-
-  //
 };
-*/

@@ -55,35 +55,3 @@ Card.prototype.draw = function(x, y) {
     ctx.closePath();
   }
 };
-  /*
-  else {
-    ctx.fillStyle = 'black';
-    ctx.strokeStyle = "white";
-    ctx.strokeRect(x, y, cardWidth, cardHeight);
-  }
-  ctx.fillRect(x, y, cardWidth, cardHeight);
-  ctx.strokeStyle = "black";
-  ctx.strokeRect(x, y, cardWidth, cardHeight);
-  ctx.font = "30px Arial";
-  ctx.textAlign = "center";
-  ctx.fillStyle = "";
-  ctx.fillText(this.number, x + (cardWidth/2), y + (cardHeight/2) + 8);
-};
-*/
-
-// cards can have hints attached to them
-
-    	// Cards can be played
-    // Card.prototype.play = function() {
-
-    // };
-
-    	// Cards can be discarded
-
-    	// Cards have a color of either green, blue, yellow, or red
-
-    	// Cards have a number from 1 - 5
-
-    	// Cards can be given hints of color or number
-
-    	// Cards have a front and back

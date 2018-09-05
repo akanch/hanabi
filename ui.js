@@ -94,8 +94,8 @@ function drawCorrectSlots() {
 	};
 };
 
+// function to draw correct pile of cards
 function drawCorrectPiles(correctGuesses) {
-	console.log(correctGuesses);
 	var yCorrect = 220;
 	var blueX = 15;
 	var greenX = blueX + cardWidth + 5;
@@ -168,8 +168,7 @@ function drawPlayerHands(playerList, handSlots) {
 		for (i = 0; i < playerList.length; i++) {
 			var x = windowX - cardWidth * 6;
 			for (j = 0; j < playerList[i].hand.length; j++) {
-				//console.log(playerList[0].hand.length);
-				playerList[i].hand[j].draw(x, y); //DRAW CARD WHEN NOTHING TO DRAW??
+				playerList[i].hand[j].draw(x, y);
 				x += cardWidth + 1;
 			}
 			y += cardHeight + 60;
@@ -314,7 +313,7 @@ function drawBoard(config) {
 	drawBlueSlots();
 	drawRedSlots();
 	drawBlueTokens(config.numBlueTokens);
-	drawRedTokens(config.wrongGuesses);
+	drawRedTokens(config.numWrongGuesses);
 	drawCorrectSlots();
 	drawCorrectPiles(config.correctGuesses);
 	drawDiscardSlots();

@@ -4,6 +4,7 @@ function Played(color) {
   this.color = color;
 };
 
+// add a card to the played pile
 Played.prototype.add = function(played) {
   this.pile.push(played);
 };
