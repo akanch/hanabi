@@ -42,13 +42,13 @@ function runGame(config) {
 // update the configuration of the game
 function update(config) {
   return function(event) {
-
     config.x = event.pageX;
     config.y = event.pageY;
 
     // if the current player decides to select one of her own cards
+    var startIdx = findIdx(config);
     if (selectOwn(config) == true) {
-      for (i = 0; i < 5; i++) {
+      for (i = startIdx; i < startIdx + 5; i++) {
         if (config.handSlots[i].selected == false && config.handIndex != i) {
           config.handSlots[i].ifSelect(config.x, config.y);
           if (config.handSlots[i].selected == true && config.action.ownCard == true) {
@@ -76,7 +76,7 @@ function update(config) {
 
     // if current player decides to discard her own card
     if (selectDiscard(config) == true) {
-      released = config.currentPlayer.release(config.handIndex);
+      released = config.currentPlayer.release(config.handIndex - startIdx);
       for (i = 0; i < config.discardPiles.length; i++) {
         if (released.color == config.discardPiles[i].color) {
           config.discardPiles[i].add(released);
@@ -125,6 +125,13 @@ function update(config) {
 
   };
 };
+
+// function to find the hand slots of the current player
+function findIdx(config) {
+  var playerIndex = config.playerList.indexOf(config.currentPlayer);
+  return playerIndex * 5
+};
+
 
 // function to check if current player selected own cards
 function selectOwn(config) {
@@ -177,7 +184,12 @@ function updateTurn(config) {
   config.currentPlayer.turn = false;
 
   // updates currentPlayer
-  config.currentPlayer = config.playerList[idx + 1];
+  if (idx < 4) {
+    config.currentPlayer = config.playerList[idx + 1];
+  }
+  else {
+    config.currentPlayer = config.playerList[0];
+  }
   config.currentPlayer.turn = true;
   config.currentPlayer.hideHand();
   // reveals the hand of current player
