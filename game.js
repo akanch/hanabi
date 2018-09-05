@@ -136,6 +136,10 @@ function update(config) {
         };
       }
 
+      if (giveHint(config) == true) {
+        console.log('hi');
+      }
+
       // see if all players have 4 cards, if so, end game
       var count = 0;
       for (i = 0; i < config.playerList.length; i++) {
@@ -206,6 +210,24 @@ function selectPlay(config) {
   } else {
     return false;
   };
+};
+
+// function to check if current player decides to give a hint to another player
+function giveHint(config) {
+  var x = windowX - cardWidth * 6;
+  var y = 50;
+  var playerIndex = config.playerList.indexOf(config.currentPlayer)
+  if (config.action.hint == true && config.x > x && config.x < x + cardWidth * 5 + 4) {
+    for (i = 0; i < config.playerList.length; i++) {
+      if (i != playerIndex) {
+        if (config.y > y && config.y < y + cardHeight) {
+          return true;
+        }
+      }
+      y += cardHeight + 60;
+    }
+  }
+  return false;
 };
 
 // function that resets actions and updates the turn of current player at end of turn
