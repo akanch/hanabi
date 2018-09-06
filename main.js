@@ -2,7 +2,7 @@ function Main() {
   var deck = new Deck();
   deck.shuffle();
   var playerList = [];
-  
+
   // discard piles
   var blueDiscard = new Discard('blue');
   var greenDiscard = new Discard('green');
@@ -31,7 +31,7 @@ function Main() {
   };
 
   // creating starting configuration
-  var config = new Config(deck, 0, playerList[0], playerList, playedPiles, discardPiles, [], 0, handSlots, hintSlots, true);
+  var config = new Config(deck, 8, playerList[0], playerList, playedPiles, discardPiles, [], 0, handSlots, hintSlots, true);
   var startGame = true;
   if (startGame == true) {
     runGame(config);

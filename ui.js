@@ -233,7 +233,7 @@ function drawHintBoard(hintSlots) {
 				ctx.font = "30px Arial";
 				ctx.textAlign = "center";
 				ctx.fillStyle = 'black';
-				hintSlots.push(new HintSlot(i, xFirstRow, yFirstRow));
+				hintSlots.push(new HintSlot(i + 1, xFirstRow, yFirstRow));
 				xFirstRow += width;
 		  }
 		  else {
@@ -242,7 +242,7 @@ function drawHintBoard(hintSlots) {
 				ctx.fillRect(xSecondRow, ySecondRow, width, width);
 				ctx.strokeRect(xSecondRow, ySecondRow, width, width);
 				ctx.closePath();
-				hintSlots.push(new HintSlot(i, xSecondRow, ySecondRow));
+				hintSlots.push(new HintSlot(colors[i - 5], xSecondRow, ySecondRow));
 		    xSecondRow += width;
 		  };
 		};

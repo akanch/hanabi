@@ -136,8 +136,30 @@ function update(config) {
         };
       }
 
-      if (giveHint(config) == true) {
+      // check if current player is choosing to give a hint to another player
+      if (selectOthers(config) == true) {
         console.log('hi');
+        var hint = config.hintSlots[config.hintIndex].hint;
+        if (config.hintIndex < 5) {
+          for (i = 0; i < config.playerList[config.otherHandsIdx].hand.length; i++) {
+            var currentNum = config.playerList[config.otherHandsIdx].hand[i].number;
+            var currentCard = config.playerList[config.otherHandsIdx].hand[i];
+            if (hint == currentNum) {
+              currentCard.numberHint = true;
+            }
+          }
+          updateTurn(config);
+        }
+        else if (config.hintIndex >= 5) {
+          for (i = 0; i < config.playerList[config.otherHandsIdx].hand.length; i++) {
+            var currentColor = config.playerList[config.otherHandsIdx].hand[i].color;
+            var currentCard = config.playerList[config.otherHandsIdx].hand[i];
+            if (hint == currentColor) {
+              currentCard.colorHint = true;
+            }
+          }
+          updateTurn(config);
+        }
       }
 
       // see if all players have 4 cards, if so, end game
@@ -181,7 +203,7 @@ function selectOwn(config) {
 function selectHint(config) {
   if (config.x > config.hintSlots[0].hintX && config.x < config.hintSlots[9].hintX + 60
   && config.y > config.hintSlots[0].hintY && config.y < config.hintSlots[9].hintY + 60
-  && config.action.ownCard == false) {
+  && config.action.ownCard == false && config.numBlueTokens > 0) {
     return true;
   } else {
     return false;
@@ -212,8 +234,8 @@ function selectPlay(config) {
   };
 };
 
-// function to check if current player decides to give a hint to another player
-function giveHint(config) {
+// function to check if current player is selecting the hand of another player to give hint
+function selectOthers(config) {
   var x = windowX - cardWidth * 6;
   var y = 50;
   var playerIndex = config.playerList.indexOf(config.currentPlayer)
@@ -221,6 +243,7 @@ function giveHint(config) {
     for (i = 0; i < config.playerList.length; i++) {
       if (i != playerIndex) {
         if (config.y > y && config.y < y + cardHeight) {
+          config.otherHandsIdx = i;
           return true;
         }
       }
@@ -232,14 +255,21 @@ function giveHint(config) {
 
 // function that resets actions and updates the turn of current player at end of turn
 function updateTurn(config) {
-  config.handSlots[config.handIndex].selected = false;
+  if (config.handIndex != null) {
+    config.handSlots[config.handIndex].selected = false;
+  };
+  if (config.hintIndex != null) {
+    config.hintSlots[config.hintIndex].selected = false;
+  };
   config.handIndex = null;
+  config.hintIndex = null;
   config.action.ownCard = false;
   config.action.hint = false;
   config.action.discard = false;
   config.action.play = false;
   var idx = config.playerList.indexOf(config.currentPlayer);
   config.currentPlayer.turn = false;
+  config.otherHandsIdx = null;
 
   // updates currentPlayer
   if (idx < 4) {
@@ -250,6 +280,7 @@ function updateTurn(config) {
   }
   config.currentPlayer.turn = true;
   config.currentPlayer.hideHand();
+
   // reveals the hand of current player
   for (var i = 0; i < config.playerList.length; i++) {
     if (config.playerList[i].turn == false) {
