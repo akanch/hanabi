@@ -62,7 +62,7 @@ function update(config) {
               config.currentPlayer.drawCard(config.currentDeck.cards);
             }
             if (config.numBlueTokens < 8) {
-              config.numBlueTokens += 1;
+              config.numBlueTokens++;
             }
             break;
           }
@@ -138,7 +138,6 @@ function update(config) {
 
       // check if current player is choosing to give a hint to another player
       if (selectOthers(config) == true) {
-        console.log('hi');
         var hint = config.hintSlots[config.hintIndex].hint;
         if (config.hintIndex < 5) {
           for (i = 0; i < config.playerList[config.otherHandsIdx].hand.length; i++) {
@@ -148,7 +147,6 @@ function update(config) {
               currentCard.numberHint = true;
             }
           }
-          updateTurn(config);
         }
         else if (config.hintIndex >= 5) {
           for (i = 0; i < config.playerList[config.otherHandsIdx].hand.length; i++) {
@@ -158,8 +156,9 @@ function update(config) {
               currentCard.colorHint = true;
             }
           }
-          updateTurn(config);
         }
+        config.numBlueTokens--;
+        updateTurn(config);
       }
 
       // see if all players have 4 cards, if so, end game
@@ -214,8 +213,8 @@ function selectHint(config) {
 function selectDiscard(config) {
   var x = 5;
   var discardY = 210 + cardHeight + 20;
-  if (config.action.ownCard == true && config.x > x && config.x < x + 700
-  && config.y > discardY && config.y < discardY + cardHeight * 5 + 40) {
+  if (config.action.ownCard == true && config.x > x && config.x < x + 700 && config.y > discardY
+    && config.y < discardY + cardHeight * 5 + 40 && config.numBlueTokens != 8) {
     return true;
   } else {
     return false;
