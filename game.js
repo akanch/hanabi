@@ -275,7 +275,7 @@ function updateTurn(config) {
   config.otherHandsIdx = null;
 
   // updates currentPlayer
-  if (idx < 4) {
+  if (idx < config.playerList.length - 1) {
     config.currentPlayer = config.playerList[idx + 1];
   }
   else {
