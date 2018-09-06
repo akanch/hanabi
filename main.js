@@ -21,7 +21,7 @@ function Main() {
   var playerThree = new Player("Eugene");
   var playerFour = new Player("Chinese New Year");
   var playerFive = new Player("Filabani");
-  var playerList = [playerOne, playerTwo, playerThree, playerFour, playerFive];
+  var playerList = [playerOne, playerTwo, playerThree];//, playerFour, playerFive];
   var handSlots = [];
   var hintSlots = [];
 

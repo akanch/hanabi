@@ -145,6 +145,7 @@ function update(config) {
             var currentCard = config.playerList[config.otherHandsIdx].hand[i];
             if (hint == currentNum) {
               currentCard.numberHint = true;
+              config.action.hint = true;
             }
           }
         }
@@ -154,11 +155,14 @@ function update(config) {
             var currentCard = config.playerList[config.otherHandsIdx].hand[i];
             if (hint == currentColor) {
               currentCard.colorHint = true;
+              config.action.hint = true;
             }
           }
         }
-        config.numBlueTokens--;
-        updateTurn(config);
+        if (config.action.hint == true) {
+          config.numBlueTokens--;
+          updateTurn(config);
+        }
       }
 
       // see if all players have 4 cards, if so, end game
