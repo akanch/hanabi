@@ -145,7 +145,7 @@ function update(config) {
             var currentCard = config.playerList[config.otherHandsIdx].hand[i];
             if (hint == currentNum) {
               currentCard.numberHint = true;
-              config.action.hint = true;
+              config.action.elseCard = true;
             }
           }
         }
@@ -155,11 +155,11 @@ function update(config) {
             var currentCard = config.playerList[config.otherHandsIdx].hand[i];
             if (hint == currentColor) {
               currentCard.colorHint = true;
-              config.action.hint = true;
+              config.action.elseCard = true;
             }
           }
         }
-        if (config.action.hint == true) {
+        if (config.action.elseCard == true) {
           config.numBlueTokens--;
           updateTurn(config);
         }
@@ -270,6 +270,7 @@ function updateTurn(config) {
   config.action.hint = false;
   config.action.discard = false;
   config.action.play = false;
+  config.action.elseCard = false;
   var idx = config.playerList.indexOf(config.currentPlayer);
   config.currentPlayer.turn = false;
   config.otherHandsIdx = null;
